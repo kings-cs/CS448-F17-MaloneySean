@@ -1,4 +1,4 @@
-package edu.kings.cs448.fall2017.base.search;
+package edu.kings.cs448.fall2017.MaloneySean.search;
 
 /**
  * An algorithm that solves problems by searching through a tree.

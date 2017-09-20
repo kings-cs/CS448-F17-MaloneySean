@@ -1,4 +1,4 @@
-package edu.kings.cs448.fall2017.base.search;
+package edu.kings.cs448.fall2017.MaloneySean.search;
 
 /**
  * An action in the Vacuum World.

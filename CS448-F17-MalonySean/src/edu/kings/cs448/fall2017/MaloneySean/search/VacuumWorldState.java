@@ -1,4 +1,4 @@
-package edu.kings.cs448.fall2017.base.search;
+package edu.kings.cs448.fall2017.MaloneySean.search;
 
 /**
  * A state in the Vacuum World.
