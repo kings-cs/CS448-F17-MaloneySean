@@ -13,6 +13,16 @@ public class EightPuzzleState {
 	private int[][] configuration;
 	
 	/**
+	 * The X coordinate of the blank.
+	 */
+	private int blankX;
+	
+	/**
+	 * The Y coordinate of the blank.
+	 */
+	private int blankY;
+	
+	/**
 	 * Constructs an Eight Puzzle state based off of input of what tile is in each position.
 	 * 
 	 * @param zero The first position in the puzzle.
@@ -37,8 +47,31 @@ public class EightPuzzleState {
 		configuration[2][0] = six;
 		configuration[2][1] = seven;
 		configuration[2][2] = eight;
+		
+		findBlank();
 	}
 
+	/**
+	 * Private helper method used to find the blank in the current state.
+	 */
+	private void findBlank() {
+		boolean foundBlank = false;
+		int i = 0;
+		int j = 0;
+		
+		while(!foundBlank && i < configuration.length) {
+			while(!foundBlank && j < configuration[0].length) {
+				if(configuration[i][j] == 0) {
+					blankX = i;
+					blankY = j;
+					
+					foundBlank = true;
+				}
+				j++;
+			}
+			i++;
+		}
+	}
 	
 	/**
 	 * Gets the configuration of the state.
@@ -47,6 +80,22 @@ public class EightPuzzleState {
 	 */
 	public int[][] getConfiguration(){
 		return configuration;
+	}
+	
+	/**
+	 * Gets the X coordinate of the blank.
+	 * @return The X coordinate of the blank.
+	 */
+	public int getBlankX() {
+		return blankX;
+	}
+	
+	/**
+	 * Gets the Y coordinate of the blank.
+	 * @return The Y coordinate of the blank.
+	 */
+	public int getBlankY() {
+		return blankY;
 	}
 	
 	/**
