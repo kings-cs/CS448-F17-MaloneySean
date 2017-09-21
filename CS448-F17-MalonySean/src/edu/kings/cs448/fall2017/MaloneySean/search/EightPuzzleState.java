@@ -58,7 +58,16 @@ public class EightPuzzleState {
 	 * @param y The y coordinate of the blank.
 	 */
 	public EightPuzzleState(int[][] config, int x, int y) {
-		configuration = config;
+		//TODO: Modify this to clone the array via a nested for loop, see if that works.
+		configuration = new int[config.length][config[0].length];
+		
+		for(int i = 0; i < config.length; i++) {
+			for(int j = 0; j < config[0].length; j++) {
+				configuration[i][j] = config[i][j];
+			}
+		}
+		
+		
 		blankX = x;
 		blankY = y;
 	}
