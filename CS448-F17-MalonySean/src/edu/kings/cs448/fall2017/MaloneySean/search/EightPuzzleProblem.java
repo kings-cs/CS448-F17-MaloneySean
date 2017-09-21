@@ -75,10 +75,44 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		return actions;
 	}
 
+	/**
+	 * Determines what the next state will be given a certain action and the current state.
+	 * 
+	 * @return The new State.
+	 */
 	@Override
 	public EightPuzzleState getResultingState(EightPuzzleAction theAction, EightPuzzleState theState) {
-		// TODO Auto-generated method stub
-		return null;
+		EightPuzzleState result = null;
+		
+		int[][] config = theState.getConfiguration();
+		int oldX = theState.getBlankX();
+		int oldY = theState.getBlankY();
+		
+		int newX = oldX;
+		int newY = oldY;
+		
+		
+		if(theAction.equals(EightPuzzleAction.UP)) {
+			newX++;
+		}
+		else if(theAction.equals(EightPuzzleAction.DOWN)) {
+			newX--;
+		}
+		else if(theAction.equals(EightPuzzleAction.LEFT)) {
+			newY--;
+		}
+		else { //RIGHT
+			newY++;
+		}
+		
+		int trav = config[newX][newY];
+		
+		config[newX][newY] = 0;
+		config[oldX][oldY] = trav;
+		
+		result = new EightPuzzleState(config, newX, newY);
+		
+		return result;
 	}
 
 	/**

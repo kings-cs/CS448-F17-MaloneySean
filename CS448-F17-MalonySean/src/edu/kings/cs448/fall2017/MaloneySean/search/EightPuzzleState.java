@@ -52,6 +52,18 @@ public class EightPuzzleState {
 	}
 
 	/**
+	 * Constructs a new Eight Puzzle State from an Array and X & Y coordinates for the blank.
+	 * @param config The array.
+	 * @param x The x coordinate of the blank.
+	 * @param y The y coordinate of the blank.
+	 */
+	public EightPuzzleState(int[][] config, int x, int y) {
+		configuration = config;
+		blankX = x;
+		blankY = y;
+	}
+	
+	/**
 	 * Private helper method used to find the blank in the current state.
 	 */
 	private void findBlank() {
