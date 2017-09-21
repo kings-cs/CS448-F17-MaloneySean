@@ -2,6 +2,7 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -118,20 +119,31 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		
 		int trav = config[newX][newY];
 		
+		
 		config[newX][newY] = 0;
 		config[oldX][oldY] = trav;
-//		System.out.println("TRAV: " + trav);
+		
+		
+		int[][] newConfig = new int[3][3];
+		
+		for(int i = 0; i < config.length; i++) {
+			for(int j = 0; j < config[0].length; j++) {
+				newConfig[i][j] = config[i][j];	
+			}
+		}
+		
+		
 		
 		//TODO: This Line Was The Attempt To Fix CLONE
-		result = new EightPuzzleState(config, newX, newY);
+		result = new EightPuzzleState(newConfig, newX, newY);
 		
-//		System.out.println(result.toString());
-//		try {
-//			TimeUnit.SECONDS.sleep(1);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		System.out.println(result.toString());
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return result;
 	}
