@@ -42,6 +42,16 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 	}
 	
 	/**
+	 * Alternate constructor taking an array representing the puzzle and the coordinates of the blank.
+	 * @param config The arrangment of the puzzle.
+	 * @param x The x coordinate of the blank.
+	 * @param y The y cooredinate of the blank.
+	 */
+	public EightPuzzleProblem(int[][] config, int x, int y) {
+		initialState = new EightPuzzleState(config, x, y);
+	}
+	
+	/**
 	 * Gets the initial state of the problem.
 	 * 
 	 * @return The initial state.
@@ -93,10 +103,10 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		
 		
 		if(theAction.equals(EightPuzzleAction.UP)) {
-			newX++;
+			newX--;
 		}
 		else if(theAction.equals(EightPuzzleAction.DOWN)) {
-			newX--;
+			newX++;
 		}
 		else if(theAction.equals(EightPuzzleAction.LEFT)) {
 			newY--;

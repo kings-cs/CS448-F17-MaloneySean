@@ -127,7 +127,19 @@ public class EightPuzzleState {
 		result.append(configuration[2][0]).append(" ");
 		result.append(configuration[2][1]).append(" ");
 		result.append(configuration[2][2]);
-		
+//		result.append("\n");
+//		
+//		result.append(configuration[0][0]).append(" ");
+//		result.append(configuration[0][1]).append(" ");
+//		result.append(configuration[0][2]).append(" ");
+//		result.append("\n");
+//		result.append(configuration[1][0]).append(" ");
+//		result.append(configuration[1][1]).append(" ");
+//		result.append(configuration[1][2]).append(" ");
+//		result.append("\n");
+//		result.append(configuration[2][0]).append(" ");
+//		result.append(configuration[2][1]).append(" ");
+//		result.append(configuration[2][2]);
 		return result.toString();
 	}
 	
