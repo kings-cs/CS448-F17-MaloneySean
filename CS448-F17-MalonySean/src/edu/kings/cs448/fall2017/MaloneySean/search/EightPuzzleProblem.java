@@ -122,7 +122,8 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		config[oldX][oldY] = trav;
 //		System.out.println("TRAV: " + trav);
 		
-		result = new EightPuzzleState(config, newX, newY);
+		//TODO: This Line Was The Attempt To Fix
+		result = new EightPuzzleState(config.clone(), newX, newY);
 		
 //		System.out.println(result.toString());
 //		try {
