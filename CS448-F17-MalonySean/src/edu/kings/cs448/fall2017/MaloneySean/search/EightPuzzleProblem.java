@@ -1,17 +1,25 @@
 package edu.kings.cs448.fall2017.MaloneySean.search;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * An Eight Puzzle Problem.
  * @author Sean Maloney
  */
-public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, EightPuzzleAction>{
+public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, EightPuzzleAction> {
 
+	/**
+	 * The goal configuration of any EightPuzzleState.
+	 */
+	private static final int[][] GOAL_CONFIG = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
+	
+	
 	/**
 	 * The initial state of the problem.
 	 */
 	private EightPuzzleState initialState;
+	
 	
 	/**
 	 * Constructs an Eight Puzzle problem.
@@ -45,8 +53,26 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 
 	@Override
 	public Set<EightPuzzleAction> getActions(EightPuzzleState theState) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<EightPuzzleAction> actions = new HashSet<EightPuzzleAction>();
+		
+		int x = theState.getBlankX();
+		int y = theState.getBlankY();
+		
+		if(x != 0) {
+			actions.add(EightPuzzleAction.UP);
+		}
+		if(x != 2) {
+			actions.add(EightPuzzleAction.DOWN);
+		}
+		if(y != 0) {
+			actions.add(EightPuzzleAction.LEFT);
+		}
+		if(y != 2) {
+			actions.add(EightPuzzleAction.RIGHT);
+		}
+		
+		
+		return actions;
 	}
 
 	@Override
@@ -55,21 +81,35 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		return null;
 	}
 
+	/**
+	 * Returns whether or not a given state meets the problem's goal.
+	 * 
+	 * @return Whether or not the given state is the goal.
+	 */
 	@Override
 	public boolean meetsGoal(EightPuzzleState theState) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		if(theState.getConfiguration().equals(GOAL_CONFIG)) {
+			result = true;
+		}
+		
+		return result;
 	}
 
+	/**
+	 * Returns the cost of a given action in the current state.
+	 * 
+	 * @return The cost of the action.
+	 */
 	@Override
 	public int getStepCost(EightPuzzleAction theAction, EightPuzzleState theState) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
+	
 	@Override
 	public int heuristicForState(EightPuzzleState theState) {
-		// TODO Auto-generated method stub
+		//Just going to return 0 for now.
 		return 0;
 	}
 

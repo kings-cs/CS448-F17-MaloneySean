@@ -4,9 +4,7 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
  * An action in the Eight Puzzle.
  * @author Sean Maloney
  */
-public enum EightPuzzleAction {
-	//TODO: Does this class handle when an action can be done or is that in problem?
-	
+public enum EightPuzzleAction {	
 	/**
 	 * Move the blank to the left.
 	 */
