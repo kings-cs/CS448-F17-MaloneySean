@@ -136,6 +136,7 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		//TODO: This Line Was The Attempt To Fix CLONE
 		result = new EightPuzzleState(newConfig, newX, newY);
 		
+		
 
 		
 		return result;
