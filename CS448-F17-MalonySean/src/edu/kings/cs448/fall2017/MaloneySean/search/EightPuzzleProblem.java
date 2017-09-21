@@ -3,6 +3,7 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * An Eight Puzzle Problem.
  * @author Sean Maloney
@@ -119,8 +120,17 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		
 		config[newX][newY] = 0;
 		config[oldX][oldY] = trav;
+//		System.out.println("TRAV: " + trav);
 		
 		result = new EightPuzzleState(config, newX, newY);
+		
+//		System.out.println(result.toString());
+//		try {
+//			TimeUnit.SECONDS.sleep(1);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		return result;
 	}
