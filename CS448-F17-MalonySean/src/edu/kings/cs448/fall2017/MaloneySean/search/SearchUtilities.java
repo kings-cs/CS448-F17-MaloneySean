@@ -52,6 +52,7 @@ public class SearchUtilities {
 		HashMap<String, SearchSolver<S, A>> map = new HashMap<>();
 		map.put("Manual", new ManualSearchSolver<S, A>());
 		map.put("BreadthFirstTreeSearch", new BreadthFirstTreeSearch<S, A>());
+		map.put("BreadthFirstGraphSearch", new BreadthFirstGraphSearch<S, A>());
 		return map;
 	}
 	
