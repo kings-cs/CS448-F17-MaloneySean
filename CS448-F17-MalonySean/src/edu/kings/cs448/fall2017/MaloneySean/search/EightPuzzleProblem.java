@@ -2,7 +2,7 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
+
 
 
 /**
@@ -11,10 +11,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, EightPuzzleAction> {
 
-	/**
-	 * The goal configuration of any EightPuzzleState.
-	 */
-	private static final int[][] GOAL_CONFIG = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
+//	/**
+//	 * The goal configuration of any EightPuzzleState.
+//	 */
+//	private static final int[][] GOAL_CONFIG = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
 	
 	
 	/**
@@ -103,6 +103,13 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		int newX = oldX;
 		int newY = oldY;
 		
+		int[][] newConfig = new int[3][3];
+		
+		for(int i = 0; i < config.length; i++) {
+			for(int j = 0; j < config[0].length; j++) {
+				newConfig[i][j] = config[i][j];	
+			}
+		}
 		
 		if(theAction.equals(EightPuzzleAction.UP)) {
 			newX--;
@@ -117,33 +124,19 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 			newY++;
 		}
 		
-		int trav = config[newX][newY];
+		//1 2 5 3 4 0 6 7 8
+		int trav = newConfig[newX][newY];
 		
 		
-		config[newX][newY] = 0;
-		config[oldX][oldY] = trav;
-		
-		
-		int[][] newConfig = new int[3][3];
-		
-		for(int i = 0; i < config.length; i++) {
-			for(int j = 0; j < config[0].length; j++) {
-				newConfig[i][j] = config[i][j];	
-			}
-		}
+		newConfig[newX][newY] = 0;
+		newConfig[oldX][oldY] = trav;
 		
 		
 		
 		//TODO: This Line Was The Attempt To Fix CLONE
 		result = new EightPuzzleState(newConfig, newX, newY);
 		
-		System.out.println(result.toString());
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		return result;
 	}
@@ -156,9 +149,11 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 	@Override
 	public boolean meetsGoal(EightPuzzleState theState) {
 		boolean result = false;
-		if(theState.getConfiguration().equals(GOAL_CONFIG)) {
+
+		if(theState.toString().equals("0 1 2 3 4 5 6 7 8")) {
 			result = true;
 		}
+	
 		
 		return result;
 	}
