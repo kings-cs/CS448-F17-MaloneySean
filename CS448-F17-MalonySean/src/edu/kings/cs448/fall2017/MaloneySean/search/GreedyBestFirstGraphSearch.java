@@ -2,6 +2,7 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
 
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 /**
@@ -59,7 +60,11 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A>  {
 
 	@Override
 	public SearchNode<S, A> selectNode(SearchProblem<S, A> problem) {
-		SearchNode<S,A> result = frontier.firstEntry().getValue();
+		Entry<Integer, SearchNode<S, A>> firstEntry = frontier.firstEntry();
+		SearchNode<S,A> result = firstEntry.getValue();
+		
+		//System.out.println(firstEntry.getKey());
+		
 		frontierMap.remove(result.getState());
 		return result;
 	}
