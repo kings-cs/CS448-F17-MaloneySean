@@ -173,7 +173,73 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 	@Override
 	public int heuristicForState(EightPuzzleState theState) {
 		//Just going to return 0 for now.
-		return 0;
+		
+		int[][] stateConfiguration = theState.getConfiguration();
+		
+		int heuristic = 0;
+		
+		for(int i = 0; i < stateConfiguration.length; i++) {
+			for(int j = 0; j < stateConfiguration[0].length; j++) {
+				int current = stateConfiguration[i][j];
+				
+				int distanceAway = 0;
+				int xDist = 0;
+				int yDist = 0;
+				
+				if(current == 1) {
+					xDist = i - 0;
+					yDist = j - 1;
+					
+					distanceAway = xDist + yDist;
+				}
+				else if(current == 2) {
+					xDist = i - 0;
+					yDist = j - 2;
+					
+					distanceAway = xDist + yDist;
+				}
+				else if(current == 3) {
+					xDist = i - 1;
+					yDist = j - 0;
+					
+					distanceAway = xDist + yDist;
+				}
+				else if(current == 4) {
+					xDist = i - 1;
+					yDist = j - 1;
+					
+					distanceAway = xDist + yDist;
+				}
+				else if(current == 5) {
+					xDist = i - 1;
+					yDist = j - 2;
+					
+					distanceAway = xDist + yDist;
+				}
+				else if(current == 6) {
+					xDist = i - 2;
+					yDist = j - 0;
+					
+					distanceAway = xDist + yDist;
+				}
+				else if(current == 7) {
+					xDist = i - 2;
+					yDist = j - 1;
+					
+					distanceAway = xDist + yDist;
+				}
+				else if(current == 8) {
+					xDist = i - 2;
+					yDist = j - 2;
+					
+					distanceAway = xDist + yDist;
+				}
+				
+				heuristic += distanceAway;
+			}
+		}
+		
+		return heuristic;
 	}
 
 }

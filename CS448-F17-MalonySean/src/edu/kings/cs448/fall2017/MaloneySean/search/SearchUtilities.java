@@ -56,6 +56,7 @@ public class SearchUtilities {
 		map.put("DepthFirstTreeSearch", new DepthFirstTreeSearch<S, A>());
 		map.put("DepthFirstGraphSearch", new DepthFirstGraphSearch<S, A>());
 		map.put("IterativeDeepeningTreeSearch", new IterativeDeepeningTreeSearch<S, A>());
+		map.put("IterativeDeepeningGraphSearch", new IterativeDeepeningGraphSearch<S, A>());
 		return map;
 	}
 	

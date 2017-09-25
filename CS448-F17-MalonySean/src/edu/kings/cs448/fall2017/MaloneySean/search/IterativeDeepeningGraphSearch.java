@@ -14,7 +14,7 @@ public class IterativeDeepeningGraphSearch<S, A> implements SearchSolver<S, A> {
 	/**
 	 * The Farthest Depth That The Algorithm is allowed to search.
 	 */
-	public static final int DEPTH_LIMIT = 31;
+	public static final int DEPTH_LIMIT = 32;
 
 	/**
 	 * The number of nodes that was expanded while searching for a solution.
@@ -33,7 +33,7 @@ public class IterativeDeepeningGraphSearch<S, A> implements SearchSolver<S, A> {
 	 */
 	public ArrayList<A> iterativeDeepeningSearch(SearchProblem<S, A> problem){
 		//Different class to implement search solver, create instances in for loop and call solve with depth limit
-		
+		//1 2 4 3 6 5 7 8 0 Took 11 
 		numExpandedNodes = 0;
 		
 		ArrayList<A> result = null;
