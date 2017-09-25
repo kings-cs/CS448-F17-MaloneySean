@@ -22,11 +22,17 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A>  {
 	private HashMap<S, SearchNode<S,A>> frontierMap;
 	
 	/**
+	 * The problem that is going to be solved.
+	 */
+	private SearchProblem<S, A> startProblem;
+	
+	/**
 	 * Constructs a new DepthFirstGraphSearch.
 	 */
 	public GreedyBestFirstGraphSearch() {
 		frontier = new TreeMap<>();
 		frontierMap = new HashMap<>();
+		startProblem = null;
 	}
 	
 	@Override
@@ -42,6 +48,8 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A>  {
 		int initalHeuristic = problem.heuristicForState(initialNode.getState());
 		frontier.put(initalHeuristic, initialNode);
 		frontierMap.put(initialNode.getState(), initialNode);	
+		
+		startProblem = problem;
 	}
 
 	@Override
@@ -58,9 +66,10 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A>  {
 
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
-		int heuristic = 0;
+		int heuristic = startProblem.heuristicForState(node.getState());
+		//Put problem in field when frontier is initalized?
 		
-		
+		frontier.put(heuristic, node);
 		frontierMap.put(node.getState(), node);	
 	}
 
