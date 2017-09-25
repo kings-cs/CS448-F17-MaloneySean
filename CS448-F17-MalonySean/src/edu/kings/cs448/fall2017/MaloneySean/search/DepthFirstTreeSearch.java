@@ -1,6 +1,8 @@
 package edu.kings.cs448.fall2017.MaloneySean.search;
 
+
 import java.util.Stack;
+
 
 /**
  * An algorithm that solves problems by searching through a tree in a depth-first manner.
@@ -31,7 +33,8 @@ public class DepthFirstTreeSearch<S, A> extends TreeSearch<S, A> {
 
 	@Override
 	public boolean isFrontierEmpty() {
-		return frontier.isEmpty();
+		boolean result = frontier.isEmpty();
+		return result;
 	}
 
 	@Override

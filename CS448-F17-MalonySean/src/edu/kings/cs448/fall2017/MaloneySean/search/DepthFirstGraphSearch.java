@@ -1,7 +1,8 @@
 package edu.kings.cs448.fall2017.MaloneySean.search;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
-import java.util.Stack;
 
 /**
  * Class used to perform a DepthFirstSearch on a Graph.
@@ -13,7 +14,7 @@ import java.util.Stack;
 public class DepthFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	/** The collection of nodes that have not yet been explored. */
-	private Stack<SearchNode<S, A>> frontier;
+	private Deque<SearchNode<S, A>> frontier;
 	
 	/**
 	 * A Map used to quickly search the same elements that are in the frontier based on their associated state.
@@ -24,7 +25,7 @@ public class DepthFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 	 * Constructs a new DepthFirstGraphSearch.
 	 */
 	public DepthFirstGraphSearch() {
-		frontier = new Stack<>();
+		frontier = new ArrayDeque<>();
 		frontierMap = new HashMap<>();
 	}
 	
