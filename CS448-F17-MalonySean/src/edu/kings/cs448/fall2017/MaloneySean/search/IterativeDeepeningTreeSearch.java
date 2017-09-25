@@ -97,12 +97,13 @@ public class IterativeDeepeningTreeSearch<S, A> extends TreeSearch<S, A> {
 						nextState, action);
 				
 				ArrayList<A> result = recursiveDLS(child, problem, limit - 1);
-				if(result.isEmpty()) {
-					cutoffOccured = true;
+				
+				if(result != null) {
+					if(result.isEmpty()) {
+						cutoffOccured = true;
+					}
 				}
-				else if(result != null) {
-					//Do nothing
-				}
+				
 			}
 			
 		}
@@ -135,6 +136,22 @@ public class IterativeDeepeningTreeSearch<S, A> extends TreeSearch<S, A> {
 		
 	
 		return result;
+	}
+	
+	@Override
+	public ArrayList<A> solve(SearchProblem<S, A> problem ) {
+		return solve(problem, DEPTH_LIMIT);
+	}
+	
+	@Override
+	public ArrayList<A> solve(SearchProblem<S, A> problem, int maxDepth) {
+		ArrayList<A> solution = null;
+
+		initializeFrontier(problem);
+		
+		solution = iterativeDeepingSearch(problem);
+		
+		return solution;
 	}
 	
 }
