@@ -150,7 +150,8 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 	@Override
 	public boolean meetsGoal(EightPuzzleState theState) {
 		boolean result = false;
-
+		
+		
 		if(theState.toString().equals("0 1 2 3 4 5 6 7 8")) {
 			result = true;
 		}

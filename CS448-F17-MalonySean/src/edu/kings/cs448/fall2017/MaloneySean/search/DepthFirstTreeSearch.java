@@ -44,7 +44,7 @@ public class DepthFirstTreeSearch<S, A> extends TreeSearch<S, A> {
 
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
-		frontier.push(node);
+		frontier.add(node);
 	}
 
 }
