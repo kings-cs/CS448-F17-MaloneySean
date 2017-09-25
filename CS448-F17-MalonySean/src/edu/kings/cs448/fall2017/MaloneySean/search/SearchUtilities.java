@@ -53,6 +53,8 @@ public class SearchUtilities {
 		map.put("Manual", new ManualSearchSolver<S, A>());
 		map.put("BreadthFirstTreeSearch", new BreadthFirstTreeSearch<S, A>());
 		map.put("BreadthFirstGraphSearch", new BreadthFirstGraphSearch<S, A>());
+		map.put("DepthFirstTreeSearch", new DepthFirstTreeSearch<S, A>());
+		map.put("DepthFirstGraphSearch", new DepthFirstGraphSearch<S, A>());
 		return map;
 	}
 	
