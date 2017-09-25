@@ -1,5 +1,7 @@
 package edu.kings.cs448.fall2017.MaloneySean.search;
 
+import java.util.Stack;
+
 /**
  * An algorithm that solves problems by using an IterativeDeepeningTreeSearch.
  * 
@@ -9,7 +11,12 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
  * @param <A> The type of actions in the problem.
  */
 public class IterativeDeepeningTreeSearch<S, A> extends TreeSearch<S, A> {
-
+	
+	/**
+	 * The collection of nodes that have not yet been explored.
+	 */
+	private Stack<SearchNode<S, A>> frontier;
+	
 	@Override
 	public void initializeFrontier(SearchProblem<S, A> problem) {
 		// TODO Auto-generated method stub

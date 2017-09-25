@@ -69,7 +69,6 @@ public class VacuumWorldProblem implements SearchProblem<VacuumWorldState, Vacuu
 	@Override
 	public boolean meetsGoal(VacuumWorldState theState) {
 		boolean result = false;
-		
 		if(theState.isaClean() == true && theState.isbClean() == true){
 			result = true;
 		}
