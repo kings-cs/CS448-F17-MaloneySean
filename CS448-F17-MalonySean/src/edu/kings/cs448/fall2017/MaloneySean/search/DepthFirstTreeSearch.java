@@ -20,7 +20,7 @@ public class DepthFirstTreeSearch<S, A> extends TreeSearch<S, A> {
 	private Stack<SearchNode<S, A>> frontier;
 	
 	/**
-	 * Constructs a new DepthFirstTreeSearch
+	 * Constructs a new DepthFirstTreeSearch.
 	 */
 	public DepthFirstTreeSearch() {
 		frontier = new Stack<>();
