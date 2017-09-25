@@ -58,6 +58,8 @@ public class SearchUtilities {
 		map.put("IterativeDeepeningTreeSearch", new IterativeDeepeningTreeSearch<S, A>());
 		map.put("IterativeDeepeningGraphSearch", new IterativeDeepeningGraphSearch<S, A>());
 		map.put("GreedyBestFirstGraphSearch", new GreedyBestFirstGraphSearch<S, A>());
+		map.put("AStarGraphSearch", new AStarGraphSearch<S, A>());
+		map.put("UniformCostGraphSearch", new UniformCostGraphSearch<S, A>());
 		return map;
 	}
 	
