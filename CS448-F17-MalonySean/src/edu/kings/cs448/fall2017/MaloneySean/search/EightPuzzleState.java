@@ -152,6 +152,7 @@ public class EightPuzzleState {
 	 * @param o The other state.
 	 * @return Whether or not the states are equal.
 	 */
+	@Override
 	public boolean equals(Object o) {
 		boolean result;
 		if(this == o) {
@@ -165,12 +166,23 @@ public class EightPuzzleState {
 				if(o instanceof EightPuzzleState) {
 					EightPuzzleState otherState = (EightPuzzleState)o;
 					int[][] otherConfig = otherState.getConfiguration();
-					if(otherConfig.equals(configuration)){
-						result = true;
+					
+					result = true;
+					
+					for(int i = 0; i < configuration.length; i++) {
+						for(int j = 0; j < configuration[0].length; j++) {
+							if(configuration[i][j] != otherConfig[i][j]) {
+								result = false;
+							}
+						}
 					}
-					else {
-						result = false;
-					}
+					
+//					if(otherConfig.equals(configuration)){
+//						result = true;
+//					}
+//					else {
+//						result = false;
+//					}
 						
 				}
 				else {

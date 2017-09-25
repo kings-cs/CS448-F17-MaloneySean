@@ -132,8 +132,7 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 		newConfig[oldX][oldY] = trav;
 		
 		
-		
-		//TODO: This Line Was The Attempt To Fix CLONE
+
 		result = new EightPuzzleState(newConfig, newX, newY);
 		
 		
@@ -151,7 +150,6 @@ public class EightPuzzleProblem  implements SearchProblem<EightPuzzleState, Eigh
 	public boolean meetsGoal(EightPuzzleState theState) {
 		boolean result = false;
 		
-		System.out.println("GOAL: " + theState.toString());
 		
 		if(theState.toString().equals("0 1 2 3 4 5 6 7 8")) {
 			result = true;
