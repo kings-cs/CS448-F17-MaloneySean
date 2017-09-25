@@ -43,7 +43,7 @@ public abstract class GraphSearch<S, A> extends SearchAlgorithm<S, A> {
 	@Override
 	public void processChild(SearchNode<S, A> node) {
 		
-		SearchNode<S, A> exploredNode = exploredSet.get(node);
+		SearchNode<S, A> exploredNode = exploredSet.get(node.getState());
 		if(exploredNode == null) {
 			SearchNode<S, A> frontierNode = searchFrontier(node.getState());
 			if(frontierNode != null) {
