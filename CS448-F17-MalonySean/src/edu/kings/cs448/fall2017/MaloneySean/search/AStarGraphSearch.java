@@ -1,19 +1,18 @@
 package edu.kings.cs448.fall2017.MaloneySean.search;
 
-
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 /**
- * Class used to perform a Greedy Best First Search on a Graph.
+ * Class used to find a solution to a problem using an A* Search on a Graph.
  * @author Sean Maloney
  *
  * @param <S> The type of states in the problem.
  * @param <A> The type of actions in the problem.
  */
-public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
-	
+public class AStarGraphSearch<S, A> extends GraphSearch<S, A> {
+
 	/** The collection of nodes that have not yet been explored. */
 	private TreeMap<Integer, SearchNode<S, A>> frontier;
 	
@@ -30,7 +29,7 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 	/**
 	 * Constructs a new DepthFirstGraphSearch.
 	 */
-	public GreedyBestFirstGraphSearch() {
+	public AStarGraphSearch() {
 		frontier = new TreeMap<>();
 		frontierMap = new HashMap<>();
 		startProblem = null;
@@ -46,8 +45,9 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 	public void initializeFrontier(SearchProblem<S, A> problem) {
 		SearchNode<S,A> initialNode = new SearchNode<S, A>(null, 0, problem.getInitialState(), null);
 		
-		int initalHeuristic = problem.heuristicForState(initialNode.getState());
-		frontier.put(initalHeuristic, initialNode);
+		int initalKey = problem.heuristicForState(initialNode.getState()) + initialNode.getPathCost();
+		
+		frontier.put(initalKey, initialNode);
 		frontierMap.put(initialNode.getState(), initialNode);	
 		
 		startProblem = problem;
@@ -71,10 +71,10 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
-		int heuristic = startProblem.heuristicForState(node.getState());
+		int keyValue = startProblem.heuristicForState(node.getState()) + node.getPathCost();
 		//Put problem in field when frontier is initalized?
 		
-		frontier.put(heuristic, node);
+		frontier.put(keyValue, node);
 		frontierMap.put(node.getState(), node);	
 	}
 
