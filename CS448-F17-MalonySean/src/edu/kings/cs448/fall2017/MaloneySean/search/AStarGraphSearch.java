@@ -61,7 +61,7 @@ public class AStarGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public SearchNode<S, A> selectNode(SearchProblem<S, A> problem) {
-		Entry<Integer, SearchNode<S, A>> firstEntry = frontier.firstEntry();
+		Entry<Integer, SearchNode<S, A>> firstEntry = frontier.pollFirstEntry();
 		SearchNode<S,A> result = firstEntry.getValue();
 		//System.out.println("S: " + firstEntry.getKey());
 		

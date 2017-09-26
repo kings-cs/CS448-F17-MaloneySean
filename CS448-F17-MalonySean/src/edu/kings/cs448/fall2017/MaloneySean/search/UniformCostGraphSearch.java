@@ -2,6 +2,7 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
 
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.Map.Entry;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Map.Entry;
 public class UniformCostGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	/** The collection of nodes that have not yet been explored. */
-	private TreeMap<Integer, SearchNode<S, A>> frontier;
+	private TreeSet<SearchNode<S, A>> frontier;
 	
 	/**
 	 * A Map used to quickly search the same elements that are in the frontier based on their associated state.
@@ -25,7 +26,7 @@ public class UniformCostGraphSearch<S, A> extends GraphSearch<S, A> {
 	 * Constructs a new DepthFirstGraphSearch.
 	 */
 	public UniformCostGraphSearch() {
-		frontier = new TreeMap<>();
+		frontier = new TreeSet<>(new PathCostComparator<S, A>());
 		frontierMap = new HashMap<>();
 	}
 	
@@ -39,9 +40,9 @@ public class UniformCostGraphSearch<S, A> extends GraphSearch<S, A> {
 	public void initializeFrontier(SearchProblem<S, A> problem) {
 		SearchNode<S,A> initialNode = new SearchNode<S, A>(null, 0, problem.getInitialState(), null);
 		
-		int initalPathCost = initialNode.getPathCost();
+		//int initalPathCost = initialNode.getPathCost();
 		
-		frontier.put(initalPathCost, initialNode);
+		frontier.add(initialNode);
 		frontierMap.put(initialNode.getState(), initialNode);		
 	}
 
@@ -52,10 +53,9 @@ public class UniformCostGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public SearchNode<S, A> selectNode(SearchProblem<S, A> problem) {
-		Entry<Integer, SearchNode<S, A>> firstEntry = frontier.firstEntry();
-		SearchNode<S,A> result = firstEntry.getValue();
-		
-		//System.out.println(firstEntry.getKey());
+		SearchNode<S, A> result = frontier.pollFirst();
+		//SearchNode<S,A> result = firstEntry.getValue();
+		//System.out.println("COST: " + firstEntry.getKey());
 		
 		frontierMap.remove(result.getState());
 		return result;
@@ -64,10 +64,11 @@ public class UniformCostGraphSearch<S, A> extends GraphSearch<S, A> {
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
 		int pathCost = node.getPathCost();
-		//Put problem in field when frontier is initalized?
-		System.out.println(pathCost);
+		//TODO: ALTER OTHERS TO USE TREE SET
+		//TODO: ALSO LOOK INTO IF YOU NEED TO RE ADD TO THE SET
+		//System.out.println("PATH: " + pathCost);
 		
-		frontier.put(pathCost, node);
+		frontier.add(node);
 		frontierMap.put(node.getState(), node);	
 	}
 
