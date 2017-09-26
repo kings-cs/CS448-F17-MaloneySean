@@ -2,8 +2,7 @@ package edu.kings.cs448.fall2017.MaloneySean.search;
 
 
 import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Class used to perform a Greedy Best First Search on a Graph.
@@ -15,25 +14,20 @@ import java.util.TreeMap;
 public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 	
 	/** The collection of nodes that have not yet been explored. */
-	private TreeMap<Integer, SearchNode<S, A>> frontier;
+	private TreeSet<SearchNode<S, A>> frontier;
 	
 	/**
 	 * A Map used to quickly search the same elements that are in the frontier based on their associated state.
 	 */
 	private HashMap<S, SearchNode<S,A>> frontierMap;
 	
-	/**
-	 * The problem that is going to be solved.
-	 */
-	private SearchProblem<S, A> startProblem;
 	
 	/**
 	 * Constructs a new DepthFirstGraphSearch.
 	 */
 	public GreedyBestFirstGraphSearch() {
-		frontier = new TreeMap<>();
+		frontier = null;
 		frontierMap = new HashMap<>();
-		startProblem = null;
 	}
 	
 	@Override
@@ -44,13 +38,12 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public void initializeFrontier(SearchProblem<S, A> problem) {
+		frontier = new TreeSet<>(new HeuristicComparator<S, A>(problem));
 		SearchNode<S,A> initialNode = new SearchNode<S, A>(null, 0, problem.getInitialState(), null);
 		
-		int initalHeuristic = problem.heuristicForState(initialNode.getState());
-		frontier.put(initalHeuristic, initialNode);
+		frontier.add(initialNode);
 		frontierMap.put(initialNode.getState(), initialNode);	
-		
-		startProblem = problem;
+	
 	}
 
 	@Override
@@ -60,8 +53,7 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public SearchNode<S, A> selectNode(SearchProblem<S, A> problem) {
-		Entry<Integer, SearchNode<S, A>> firstEntry = frontier.pollFirstEntry();
-		SearchNode<S,A> result = firstEntry.getValue();
+		SearchNode<S,A> result = frontier.pollFirst();
 		
 		//System.out.println(firstEntry.getKey());
 		
@@ -71,10 +63,9 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
-		int heuristic = startProblem.heuristicForState(node.getState());
 		//Put problem in field when frontier is initalized?
 		
-		frontier.put(heuristic, node);
+		frontier.add(node);
 		frontierMap.put(node.getState(), node);	
 	}
 

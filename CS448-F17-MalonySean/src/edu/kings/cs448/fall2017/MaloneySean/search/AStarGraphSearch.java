@@ -1,8 +1,7 @@
 package edu.kings.cs448.fall2017.MaloneySean.search;
 
 import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.Map.Entry;
+import java.util.TreeSet;
 
 /**
  * Class used to find a solution to a problem using an A* Search on a Graph.
@@ -14,7 +13,7 @@ import java.util.Map.Entry;
 public class AStarGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	/** The collection of nodes that have not yet been explored. */
-	private TreeMap<Integer, SearchNode<S, A>> frontier;
+	private TreeSet<SearchNode<S, A>> frontier;
 	
 	/**
 	 * A Map used to quickly search the same elements that are in the frontier based on their associated state.
@@ -22,17 +21,11 @@ public class AStarGraphSearch<S, A> extends GraphSearch<S, A> {
 	private HashMap<S, SearchNode<S,A>> frontierMap;
 	
 	/**
-	 * The problem that is going to be solved.
-	 */
-	private SearchProblem<S, A> startProblem;
-	
-	/**
 	 * Constructs a new DepthFirstGraphSearch.
 	 */
 	public AStarGraphSearch() {
-		frontier = new TreeMap<>();
+		frontier = null;
 		frontierMap = new HashMap<>();
-		startProblem = null;
 	}
 	
 	@Override
@@ -43,15 +36,13 @@ public class AStarGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public void initializeFrontier(SearchProblem<S, A> problem) {
+		frontier = new TreeSet<>(new HeuristicPathComparator<S, A>(problem));
 		SearchNode<S,A> initialNode = new SearchNode<S, A>(null, 0, problem.getInitialState(), null);
 		
-		int initalKey = problem.heuristicForState(initialNode.getState()) + initialNode.getPathCost();
+
 		
-		
-		frontier.put(initalKey, initialNode);
+		frontier.add(initialNode);
 		frontierMap.put(initialNode.getState(), initialNode);	
-		
-		startProblem = problem;
 	}
 
 	@Override
@@ -61,9 +52,8 @@ public class AStarGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public SearchNode<S, A> selectNode(SearchProblem<S, A> problem) {
-		Entry<Integer, SearchNode<S, A>> firstEntry = frontier.pollFirstEntry();
-		SearchNode<S,A> result = firstEntry.getValue();
-		//System.out.println("S: " + firstEntry.getKey());
+		SearchNode<S,A> result = frontier.pollFirst();
+		
 		
 		frontierMap.remove(result.getState());
 		return result;
@@ -71,11 +61,8 @@ public class AStarGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
-		int keyValue = startProblem.heuristicForState(node.getState()) + node.getPathCost();
-		//System.out.println("H: " + startProblem.heuristicForState(node.getState()) + ", P: " + node.getPathCost());
-		//Put problem in field when frontier is initalized?
 		
-		frontier.put(keyValue, node);
+		frontier.add(node);
 		frontierMap.put(node.getState(), node);	
 	}
 

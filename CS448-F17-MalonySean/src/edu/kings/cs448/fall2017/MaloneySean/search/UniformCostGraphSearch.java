@@ -1,9 +1,8 @@
 package edu.kings.cs448.fall2017.MaloneySean.search;
 
 import java.util.HashMap;
-import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Map.Entry;
+
 
 /**
  * Class used to find a solution to a problem using a Uniform Cost Graph Search.
@@ -63,7 +62,6 @@ public class UniformCostGraphSearch<S, A> extends GraphSearch<S, A> {
 
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
-		int pathCost = node.getPathCost();
 		//TODO: ALTER OTHERS TO USE TREE SET
 		//TODO: ALSO LOOK INTO IF YOU NEED TO RE ADD TO THE SET
 		//System.out.println("PATH: " + pathCost);
