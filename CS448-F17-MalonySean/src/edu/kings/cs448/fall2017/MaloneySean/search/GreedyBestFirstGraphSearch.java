@@ -64,7 +64,7 @@ public class GreedyBestFirstGraphSearch<S, A> extends GraphSearch<S, A> {
 	@Override
 	public void addToFrontier(SearchNode<S, A> node) {
 		//Put problem in field when frontier is initalized?
-		
+		//1 2 0 3 7 8 4 5 6
 	
 		frontier.add(node);
 		frontierMap.put(node.getState(), node);	
