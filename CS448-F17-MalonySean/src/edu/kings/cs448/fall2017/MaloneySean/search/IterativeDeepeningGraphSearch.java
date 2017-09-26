@@ -40,7 +40,7 @@ public class IterativeDeepeningGraphSearch<S, A> implements SearchSolver<S, A> {
 		int currentDepth = 0;
 		boolean done = false;
 		while(!done && currentDepth < DEPTH_LIMIT) {
-			System.out.println(currentDepth);
+			//System.out.println(currentDepth);
 			DepthFirstGraphSearch<S, A> currentSearch = new DepthFirstGraphSearch<S, A>();
 			result = currentSearch.solve(problem, currentDepth);
 			

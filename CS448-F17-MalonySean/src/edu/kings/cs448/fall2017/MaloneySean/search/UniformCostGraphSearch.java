@@ -64,7 +64,7 @@ public class UniformCostGraphSearch<S, A> extends GraphSearch<S, A> {
 	public void addToFrontier(SearchNode<S, A> node) {
 		//TODO: ALTER OTHERS TO USE TREE SET
 		//TODO: ALSO LOOK INTO IF YOU NEED TO RE ADD TO THE SET
-		//System.out.println("PATH: " + pathCost);
+
 		
 		frontier.add(node);
 		frontierMap.put(node.getState(), node);	
