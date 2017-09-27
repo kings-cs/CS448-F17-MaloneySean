@@ -19,9 +19,29 @@ IterativeDeepeningGraphSearch:
 	Finds solution of length 11 after generating 1627 nodes and ran for 0.02316178 seconds.
 
 GreedyBestFirstGraphSearch:
-	Finds solutions of length 19 after expanding 135 nodes and ran for 0.01229764.
+	Finds solutions of length 19 after expanding 135 nodes and ran for 0.01229764 seconds.
 	
 AStarGraphSearch:
-	
+	Didn't find solution... (Generates 244 nodes and runs for 0.007564784 seconds)
 
 UniformCostGraphSearch:
+	Didn't find solution... (Generates 43 nodes and runs for 0.004009263 seconds)
+	
+	
+	Of the algorithms that did not find a solution, if 
+IterativeDeepeningTreeSearch was given enough time it would have found a solution.
+DepthFirstTreeSearch given enough resources may have been able to find a solution, but
+the algorithm is not complete so there is no guarantee, it may have gotten itself into
+an infinite loop. 
+	Optimal solutions were found by BreadthFirstTreeSearch, BreadthFirstGraphSearch,
+and IterativeDeepeningGraphSearch. GreedyBestFirstGrahSeach could have found an optimal
+solution if a high enough quality heuristic was used, I used h1 which from these results
+does not appear to be the best.
+	In terms of nodes generated vs. runtime GreedyBestFirstGraphSearch had the best usage
+of resources to find a solution (albeit it was not an optimal one). Out of the algorithms
+that did generate an optimal solution, BreadthFirstGraphSearch was the most efficient in 
+terms of nodes generated, run time, and the ratio between the two.
+	The result of these algorithms line up with our studies of them except for 
+A*GraphSearch and UniformCostGraphSearch which are both supposed to be complete so they 
+should have found a solution. Additionally, Uniform should have found an optimal solution.
+These result indicate that a bug exists somewhere in their implementations.		
