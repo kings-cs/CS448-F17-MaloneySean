@@ -1,0 +1,27 @@
+Initial State: 1 2 4 3 6 5 7 8 0
+
+BreadthFirstTreeSearch:
+	Finds solution of length 11 after generating 126691 after running for 0.727161848 seconds.
+
+BreadthFirstGraphSearch:
+	Finds solution of length 11 after generating 1209 nodes after running for 0.016690508 seconds.
+	
+DepthFirstTreeSearch:
+	OutOfMemoryError Exception.
+
+DepthFirstGraphSearch:
+	Finds solution of length 615161 after generating 77272 nodes after running for 0.563897817 seconds.
+	
+IterativeDeepeningTreeSearch:
+	Manually killed after running for more than one hour.
+	
+IterativeDeepeningGraphSearch:
+	Finds solution of length 11 after generating 1627 nodes and ran for 0.02316178 seconds.
+
+GreedyBestFirstGraphSearch:
+	Finds solutions of length 19 after expanding 135 nodes and ran for 0.01229764.
+	
+AStarGraphSearch:
+	
+
+UniformCostGraphSearch:
