@@ -1,4 +1,4 @@
-package edu.kings.cs448.fall2017.MaloneySean.local;
+package edu.kings.cs448.fall2017.MaloneySean.hw02;
 
 /**
  * A problem that can be solved by at least one local search technique.
