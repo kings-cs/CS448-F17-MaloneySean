@@ -152,6 +152,14 @@ public class EightQueensState {
 				queens += nChoose2(columnCount);
 			}
 		}
+		
+		//Checks for diagonals 
+		for(int i = 0; i < board.length; i++) {
+			for(int j = 0; j < board[0].length; j++) {
+				char current = board[j][j];
+				System.out.println(current);
+			}
+		}
 
 		//System.out.println("COL: " + queens);
 		return queens;
@@ -202,9 +210,21 @@ public class EightQueensState {
 							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
 							   { ' ', ' ', ' ', ' ', ' ', 'Q', ' ', ' ' }, 
 							   { 'Q', ' ', 'Q', ' ', ' ', 'Q', ' ', ' ' } };
+		
+		char[][] testBoardTwo = { { '1', '2', '3', '4', '5', '6', '7', '8' }, 
+				   				  { '2', '1', '2', '3', '4', '5', '6', '7' },
+				   				  { '3', '2', '1', '2', '3', '4', '5', '6' }, 
+				   				  { '4', '3', '2', '1', '2', '3', '4', '5' },
+				   				  { '5', '4', '3', '2', '1', '2', '3', '4' }, 
+				   				  { '6', '5', '4', '3', '2', '1', '2', '3' },
+				   				  { '7', '6', '5', '4', '3', '2', '1', '2' }, 
+				   				  { '8', '7', '6', '5', '4', '3', '2', '1' } };
 
 		EightQueensState test = new EightQueensState(testBoard);
-		test.getQueensAttacking();
+		EightQueensState testTwo = new EightQueensState(testBoardTwo);
+		
+		//test.getQueensAttacking();
+		testTwo.getQueensAttacking();
 	}
 
 }
