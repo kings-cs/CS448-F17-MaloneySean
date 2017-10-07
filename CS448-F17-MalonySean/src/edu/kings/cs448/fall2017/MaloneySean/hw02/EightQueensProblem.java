@@ -17,8 +17,8 @@ public class EightQueensProblem implements HillClimbingProblem<EightQueensState>
 
 	@Override
 	public int getFitness(EightQueensState theState) {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO: Does this return the number of attacking pairs?
+		return theState.getQueensAttacking();
 	}
 
 	@Override

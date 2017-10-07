@@ -1,5 +1,8 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw02;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Class to represent a state in an EightQueensProblem.
  * 
@@ -112,6 +115,22 @@ public class EightQueensState {
 
 		return result;
 	}
+	
+	/**
+	 * Gets all states that would result from making a single move in this state.
+	 * @return The set of states.
+	 */
+	public Set<EightQueensState> getChildren(){
+		Set<EightQueensState> result = new HashSet<EightQueensState>();
+		
+		for(int i = 0; i < board.length; i++) {
+			for(int j = 0; j < board[0].length; j++) {
+					//HOW THE ACTUAL FUCK
+			}
+		}
+		
+		return result;
+	}
 
 	/**
 	 * Calculates the amount of pairs of queens that are attacking each other on a given board.
@@ -138,7 +157,7 @@ public class EightQueensState {
 		}
 		
 		
-		System.out.println("ROW: " + queens);
+		//System.out.println("ROW: " + queens);
 
 		// Checks for pairs within the same column
 		for (int i = 0; i < board.length; i++) {
