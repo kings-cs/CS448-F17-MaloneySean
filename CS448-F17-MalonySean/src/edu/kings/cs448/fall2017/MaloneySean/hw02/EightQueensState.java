@@ -137,7 +137,8 @@ public class EightQueensState {
 			}
 		}
 		
-		//System.out.println("ROW: " + queens);
+		
+		System.out.println("ROW: " + queens);
 
 		// Checks for pairs within the same column
 		for (int i = 0; i < board.length; i++) {
@@ -153,13 +154,47 @@ public class EightQueensState {
 			}
 		}
 		
-		//Checks for diagonals 
-		for(int i = 0; i < board.length; i++) {
-			for(int j = 0; j < board[0].length; j++) {
-				char current = board[j][j];
-				System.out.println(current);
-			}
+		//System.out.println("ROW + COL: " + queens);
+		
+		//Checks for Queen Pairs on the left diagonal (/).
+		for (int i = 0; i < 2 * board.length; i++) {
+			int leftDiag = 0;
+
+		    for (int j = 0; j < board[0].length; j++) {
+		        int coord = i - j;
+		        if(coord >= 0 && coord < board.length) {
+		        	char leftCurrent = board[j][coord];
+		        	if(leftCurrent == 'Q') {
+		        		leftDiag++;
+		        	}		  
+		        }
+		    }
+		    if(leftDiag != 0) {
+		    	queens += nChoose2(leftDiag);
+		    }
 		}
+		
+		//System.out.println("ROW + COL + /: " + queens);
+		
+		for (int i = 2 * board.length; i > 0; i--) {
+			int rightDiag = 0;
+
+		    for (int j = 0; j < board[0].length; j++) {
+		        int coord = i - j;
+		        if(coord >= 0 && coord < board.length) {
+		        	char leftCurrent = board[j][coord];
+		        	if(leftCurrent == 'Q') {
+		        		rightDiag++;
+		        	}		  
+		        }
+		    }
+		    if(rightDiag != 0) {
+		    	queens += nChoose2(rightDiag);
+		    }
+		}
+		
+		//Checks for Queens pairs on the left diagonal (/).
+		
 
 		//System.out.println("COL: " + queens);
 		return queens;
@@ -196,35 +231,4 @@ public class EightQueensState {
 
 		return result;
 	}
-
-	/**
-	 * Main method used only for testing.
-	 * @param args Not used.
-	 */
-	public static void main(String[] args) {
-		char[][] testBoard = { { 'Q', ' ', ' ', 'Q', ' ', 'Q', ' ', 'Q' }, 
-							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }, 
-							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }, 
-							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-							   { ' ', ' ', ' ', ' ', ' ', 'Q', ' ', ' ' }, 
-							   { 'Q', ' ', 'Q', ' ', ' ', 'Q', ' ', ' ' } };
-		
-		char[][] testBoardTwo = { { '1', '2', '3', '4', '5', '6', '7', '8' }, 
-				   				  { '2', '1', '2', '3', '4', '5', '6', '7' },
-				   				  { '3', '2', '1', '2', '3', '4', '5', '6' }, 
-				   				  { '4', '3', '2', '1', '2', '3', '4', '5' },
-				   				  { '5', '4', '3', '2', '1', '2', '3', '4' }, 
-				   				  { '6', '5', '4', '3', '2', '1', '2', '3' },
-				   				  { '7', '6', '5', '4', '3', '2', '1', '2' }, 
-				   				  { '8', '7', '6', '5', '4', '3', '2', '1' } };
-
-		EightQueensState test = new EightQueensState(testBoard);
-		EightQueensState testTwo = new EightQueensState(testBoardTwo);
-		
-		//test.getQueensAttacking();
-		testTwo.getQueensAttacking();
-	}
-
 }
