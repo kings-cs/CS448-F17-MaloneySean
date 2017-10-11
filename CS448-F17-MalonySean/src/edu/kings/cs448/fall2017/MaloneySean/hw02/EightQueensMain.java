@@ -16,6 +16,8 @@ public class EightQueensMain {
 	 */
 	public static void main(String[] args) {
 		//***************Hill Climbing Test**********************
+		System.out.println("Hill Climbing Search Test: ");
+		System.out.println();
 		HillClimbingSearch<EightQueensState> queenSearch = new HillClimbingSearch<EightQueensState>();
 
 		
@@ -82,11 +84,47 @@ public class EightQueensMain {
 		System.out.println("100 Sideways Steps Average Moves For Failure: " + (double) failMoves / fails);
 	
 	
-	
 		//***************Genetic Test**********************
-	
+		System.out.println();
+		System.out.println("Gentic Search Test: ");
+		System.out.println();
+		GeneticSearch<EightQueensState> geneticTest = new GeneticSearch<EightQueensState>();
+		EightQueensProblem geneticProblem = new EightQueensProblem();
+		
+		int generationsNeeded = 0;
+		
+		for(int i = 0; i < 10; i++) {
+			geneticTest.solve(geneticProblem, 100, 5);
+			generationsNeeded += geneticTest.getGenerationCount();
+		}
+		
+		System.out.println("100 Generations 5% Mutation Average Generations Needed: " + generationsNeeded / 10);
+		
+		generationsNeeded = 0;
+		
+		for(int i = 0; i < 10; i++) {
+			geneticTest.solve(geneticProblem, 100, 20);
+			generationsNeeded += geneticTest.getGenerationCount();
+		}
+		
+		System.out.println("100 Generations 20% Mutation Average Generations Needed: " + generationsNeeded / 10);
+		
+		generationsNeeded = 0;
+		
+		for(int i = 0; i < 10; i++) {
+			geneticTest.solve(geneticProblem, 200, 20);
+			generationsNeeded += geneticTest.getGenerationCount();
+		}
+		
+		System.out.println("200 Generations 20% Mutation Average Generations Needed: " + generationsNeeded / 10);
+		
+		
 		
 		//***************Bogo Test**********************
+		System.out.println();
+		System.out.println("Bogo Test: ");
+		System.out.println();
+		
 		BogoSearch<EightQueensState> bogoTest = new BogoSearch<EightQueensState>();
 		EightQueensProblem bogoTestProblem = new EightQueensProblem();
 	
