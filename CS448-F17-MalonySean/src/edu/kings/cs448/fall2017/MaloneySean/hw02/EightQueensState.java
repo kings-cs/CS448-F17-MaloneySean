@@ -26,7 +26,7 @@ public class EightQueensState {
 	}
 	
 	/**
-	 * Constructor used to create an EightQueensState based on row coordinate for each of the eight Queens.
+	 * Constructor used to create an EightQueensState based on row coordinate for each of the eight Queens. 
 	 * 
 	 * @param rowOne The first row coordinate.
 	 * @param rowTwo The second row coordinate.
