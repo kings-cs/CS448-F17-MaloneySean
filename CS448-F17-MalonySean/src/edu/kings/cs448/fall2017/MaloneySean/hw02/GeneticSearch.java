@@ -84,10 +84,17 @@ public class GeneticSearch<S> {
 				problem.mutate(child);
 			}
 			newGeneration.add(child);
+			
+//			int childFit = problem.getFitness(child);
+//			if(childFit == problem.getMaximumFitness()) {
+//				System.out.println("BARK");
+//			}
 		}
 		
 		
-		return generation;
+
+		
+		return newGeneration;
 	}
 	
 	/**
@@ -100,8 +107,14 @@ public class GeneticSearch<S> {
 		int totalFitness = 0;
 		
 		for(S current : generation) {
-			totalFitness += problem.getFitness(current);
+			int currentFitness = problem.getFitness(current);
+			
+			System.out.println("C: " + currentFitness);
+			
+			totalFitness += currentFitness;
 		}
+		
+	
 		
 		S found = null;
 		int accumlatedFitness = 0;
@@ -129,7 +142,7 @@ public class GeneticSearch<S> {
 	}
 	
 	/**
-	 * Method to check if a genertaion contains a solution and return that state if so.
+	 * Method to check if a generation contains a solution and return that state if so.
 	 * @param generation The generation to be searched.
 	 * @param problem The problem to be solved.
 	 * @return A solution state if found, otherwise null.
@@ -137,11 +150,11 @@ public class GeneticSearch<S> {
 	private S checkGeneration(Set<S> generation, GeneticProblem<S> problem) {
 		S result = null;
 		Iterator<S> iter = generation.iterator();
+		
 		boolean found = false;
 		while(!found && iter.hasNext()) {
 			S current = iter.next();
 			int currentFitness = problem.getFitness(current);
-		
 			if(currentFitness == problem.getMaximumFitness()) {
 				result = current;
 				found = true;

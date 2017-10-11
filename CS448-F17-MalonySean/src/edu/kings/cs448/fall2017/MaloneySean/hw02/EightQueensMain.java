@@ -93,8 +93,8 @@ public class EightQueensMain {
 		
 		int generationsNeeded = 0;
 		
-		for(int i = 0; i < 10; i++) {
-			geneticTest.solve(geneticProblem, 100, 5);
+		for(int i = 0; i < 1; i++) {
+			geneticTest.solve(geneticProblem, 10, 5);
 			generationsNeeded += geneticTest.getGenerationCount();
 		}
 		
