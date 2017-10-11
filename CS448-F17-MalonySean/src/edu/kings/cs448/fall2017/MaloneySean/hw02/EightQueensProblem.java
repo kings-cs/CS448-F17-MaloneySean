@@ -50,4 +50,9 @@ public class EightQueensProblem implements HillClimbingProblem<EightQueensState>
 		return theState.getChildren();
 	}
 
+//	public static void main(String[] args) {
+//			EightQueensProblem test = new EightQueensProblem();
+//			
+//			System.out.println(test.getRandomState().toString());
+//	}
 }

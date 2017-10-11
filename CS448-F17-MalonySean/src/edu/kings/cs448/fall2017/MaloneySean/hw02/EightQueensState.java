@@ -48,8 +48,6 @@ public class EightQueensState {
 		board[rowSix][5] = 'Q';
 		board[rowSeven][6] = 'Q';
 		board[rowEight][7] = 'Q';
-		
-		//System.out.println(this.toString());
 	}
 
 	/**
