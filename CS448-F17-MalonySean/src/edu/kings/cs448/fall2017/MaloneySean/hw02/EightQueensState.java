@@ -24,6 +24,33 @@ public class EightQueensState {
 	public EightQueensState(char[][] gameBoard) {
 		board = gameBoard;
 	}
+	
+	/**
+	 * Constructor used to create an EightQueensState based on row coordinate for each of the eight Queens.
+	 * 
+	 * @param rowOne The first row coordinate.
+	 * @param rowTwo The second row coordinate.
+	 * @param rowThree The third row coordinate.
+	 * @param rowFour The fourth row coordinate. 
+	 * @param rowFive The fifth row coordinate. 
+	 * @param rowSix The sixth row coordinate. 
+	 * @param rowSeven The seventh row coordinate. 
+	 * @param rowEight The eighth row coordinate.
+	 */
+	public EightQueensState(int rowOne, int rowTwo, int rowThree, int rowFour, int rowFive, int rowSix, int rowSeven, int rowEight) {
+		board = new char[8][8];
+		
+		board[rowOne][0] = 'Q';
+		board[rowTwo][1] = 'Q';
+		board[rowThree][2] = 'Q';
+		board[rowFour][3] = 'Q';
+		board[rowFive][4] = 'Q';
+		board[rowSix][5] = 'Q';
+		board[rowSeven][6] = 'Q';
+		board[rowEight][7] = 'Q';
+		
+		//System.out.println(this.toString());
+	}
 
 	/**
 	 * Method to get a copy of the current state of the game board.

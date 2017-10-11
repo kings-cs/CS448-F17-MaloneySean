@@ -1,5 +1,6 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw02;
 
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -9,10 +10,27 @@ import java.util.Set;
  */
 public class EightQueensProblem implements HillClimbingProblem<EightQueensState> {
 
+	/**
+	 * Random used to generate numbers used in creating a random state.
+	 */
+	private Random rand;
+	
+	/**
+	 * Default Constructor.
+	 */
+	public EightQueensProblem() {
+		rand = new Random();
+	}
+	
 	@Override
 	public EightQueensState getRandomState() {
 		// TODO: Also how?
-		return null;
+		int[] rows = {rand.nextInt(8), rand.nextInt(8), rand.nextInt(8), rand.nextInt(8),
+				rand.nextInt(8), rand.nextInt(8), rand.nextInt(8), rand.nextInt(8)};
+		
+		EightQueensState result = new EightQueensState(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7]);
+		
+		return result;
 	}
 
 	@Override
