@@ -123,10 +123,48 @@ public class EightQueensState {
 	public Set<EightQueensState> getChildren(){
 		Set<EightQueensState> result = new HashSet<EightQueensState>();
 		
-		for(int i = 0; i < board.length; i++) {
-			for(int j = 0; j < board[0].length; j++) {
-					//HOW THE ACTUAL FUCK
+		for (int i = 0; i < board.length; i++) {
+			int queenLocation = findQueen(i);
+			for (int j = 1; j < board[0].length; j++) {
+				char[][] boardCopy = this.getBoardCopy();
+				
+				boardCopy[queenLocation][i] = ' ';
+				
+				int newQueen = queenLocation + j;
+				
+				if(newQueen >= board[0].length) {
+					newQueen = newQueen % board[0].length;
+				}
+				
+				boardCopy[newQueen][i] = 'Q';
+				
+				EightQueensState neighbor = new EightQueensState(boardCopy);
+				result.add(neighbor);
 			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Private helper method to find the row coordinate of a queen in a given column.
+	 * @param column The column the queen is in.
+	 * @return The row coordinate of the queen.
+	 */
+	private int findQueen(int column) {
+		int result = 0;
+		int count = 0;
+		boolean found = false;
+		
+		while(!found && count < board[0].length) {
+			char current = board[count][column];
+			
+			if(current == 'Q') {
+				found = true;
+				result = count;
+			}
+			
+			count++;
 		}
 		
 		return result;
@@ -250,4 +288,33 @@ public class EightQueensState {
 
 		return result;
 	}
+	
+//	/**
+//	 * Main method used only for testing.
+//	 * @param args Not used.
+//	 */
+//	public static void main(String[] args) {
+//		char[][] testBoard = { { 'Q', ' ', ' ', 'Q', ' ', 'Q', ' ', 'Q' }, 
+//							   { ' ', 'Q', ' ', ' ', ' ', ' ', ' ', ' ' },
+//							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }, 
+//							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+//							   { ' ', ' ', ' ', ' ', 'Q', ' ', ' ', ' ' }, 
+//							   { ' ', ' ', ' ', ' ', ' ', ' ', 'Q', ' ' },
+//							   { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }, 
+//							   { ' ', ' ', 'Q', ' ', ' ', ' ', ' ', ' ' } };
+//
+//		char[][] testBoardTwo = { { '1', '2', '3', '4', '5', '6', '7', '8' }, 
+//				{ '2', '1', '2', '3', '4', '5', '6', '7' },
+//				{ '3', '2', '1', '2', '3', '4', '5', '6' }, 
+//				{ '4', '3', '2', '1', '2', '3', '4', '5' },
+//				{ '5', '4', '3', '2', '1', '2', '3', '4' }, 
+//				{ '6', '5', '4', '3', '2', '1', '2', '3' },
+//				{ '7', '6', '5', '4', '3', '2', '1', '2' }, 
+//				{ '8', '7', '6', '5', '4', '3', '2', '1' } };
+//
+//		EightQueensState test = new EightQueensState(testBoard);
+//		EightQueensState testTwo = new EightQueensState(testBoardTwo);
+//
+//		test.getChildren();
+//	}
 }
