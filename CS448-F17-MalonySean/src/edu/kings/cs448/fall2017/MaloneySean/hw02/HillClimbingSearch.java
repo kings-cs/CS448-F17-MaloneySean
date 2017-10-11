@@ -2,6 +2,7 @@ package edu.kings.cs448.fall2017.MaloneySean.hw02;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -46,11 +47,13 @@ public class HillClimbingSearch<S> {
 			}
 			
 			if(isBetter) {
-				current = bestSet.iterator().next();
+				//current = bestSet.iterator().next();
+				current = selectRandomState(bestSet);
 				sideWays = 0;
 			}
 			else if(!bestSet.isEmpty() && sideWays < maxSidewaysMoves) {
-				current = bestSet.iterator().next();
+				//current = bestSet.iterator().next();
+				current = selectRandomState(bestSet);
 				sideWays++;
 			}
 			else {
@@ -61,6 +64,24 @@ public class HillClimbingSearch<S> {
 		}
 		
 		return current;
+	}
+	
+	/**
+	 * Method to select a random state out of a given set.
+	 * @param set The set of states.
+	 * @return The randomly chosen state.
+	 */
+	@SuppressWarnings("unchecked")
+	private S selectRandomState(Set<S> set) {
+		S result = null;
+		Random rand = new Random();
+		
+		int randomNum = rand.nextInt(set.size());
+		 
+		result = (S) set.toArray()[randomNum];
+		
+		
+		return result;
 	}
 	
 	/**
@@ -77,7 +98,7 @@ public class HillClimbingSearch<S> {
 		while(result == true && iter.hasNext()) {
 			S currentBest = iter.next();
 			int currentBestFitness = problem.getFitness(currentBest);
-			
+
 			if(currentBestFitness == currentFitness) {
 				result = false;
 			}

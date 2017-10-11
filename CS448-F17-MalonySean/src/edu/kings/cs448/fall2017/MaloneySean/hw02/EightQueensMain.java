@@ -36,9 +36,9 @@ public class EightQueensMain {
 			}
 		}
 		
-		System.out.println("No Moves Successes: " + successes);
-		System.out.println("No Moves Average Success Moves: " + (double) successMoves / 1000);
-		System.out.println("No Moves Average Fail Moves: " + (double) failMoves / 1000);
+		System.out.println("No Sideways Steps Successes: " + successes);
+		System.out.println("No Sideways Steps Average Moves For Success: " + (double) successMoves / 1000);
+		System.out.println("No Sideways Steps Average Moves For Failure: " + (double) failMoves / 1000);
 		
 		
 		successes = 0;
@@ -58,8 +58,8 @@ public class EightQueensMain {
 			}
 		}
 		
-		System.out.println("100 Moves Successes: " + successes);
-		System.out.println("100 Moves Average Success Moves: " + (double) successMoves / 1000);
-		System.out.println("100 Moves Average Fail Moves: " + (double) failMoves / 1000);
+		System.out.println("100 Sideways Steps Successes: " + successes);
+		System.out.println("100 Sideways Steps Average Moves For Success: " + (double) successMoves / 1000);
+		System.out.println("100 Sideways Steps Average Moves For Failure: " + (double) failMoves / 1000);
 	}
 }
