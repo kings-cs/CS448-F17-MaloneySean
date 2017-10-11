@@ -15,11 +15,13 @@ public class EightQueensMain {
 	 *            Not Used.
 	 */
 	public static void main(String[] args) {
+		//***************Hill Climbing Test**********************
 		HillClimbingSearch<EightQueensState> queenSearch = new HillClimbingSearch<EightQueensState>();
 
 		
 
 		int successes = 0;
+		int fails = 0;
 		int successMoves = 0;
 		int failMoves = 0;
 
@@ -33,15 +35,24 @@ public class EightQueensMain {
 				successMoves += queenSearch.getMovesTaken();
 			} else {
 				failMoves += queenSearch.getMovesTaken();
+				fails++;
 			}
 		}
 		
+		if(fails == 0) {
+			fails = 1;
+		}
+		if(successes == 0) {
+			successes = 1;
+		}
+		
 		System.out.println("No Sideways Steps Successes: " + successes);
-		System.out.println("No Sideways Steps Average Moves For Success: " + (double) successMoves / 1000);
-		System.out.println("No Sideways Steps Average Moves For Failure: " + (double) failMoves / 1000);
+		System.out.println("No Sideways Steps Average Moves For Success: " + (double) successMoves / successes);
+		System.out.println("No Sideways Steps Average Moves For Failure: " + (double) failMoves / fails);
 		
 		
 		successes = 0;
+		fails = 0;
 		successMoves = 0;
 	    failMoves = 0;
 		
@@ -55,11 +66,36 @@ public class EightQueensMain {
 				successMoves += queenSearch.getMovesTaken();
 			} else {
 				failMoves += queenSearch.getMovesTaken();
+				fails++;
 			}
 		}
 		
+		if(fails == 0) {
+			fails = 1;
+		}
+		if(successes == 0) {
+			successes = 1;
+		}
+		
 		System.out.println("100 Sideways Steps Successes: " + successes);
-		System.out.println("100 Sideways Steps Average Moves For Success: " + (double) successMoves / 1000);
-		System.out.println("100 Sideways Steps Average Moves For Failure: " + (double) failMoves / 1000);
+		System.out.println("100 Sideways Steps Average Moves For Success: " + (double) successMoves / successes);
+		System.out.println("100 Sideways Steps Average Moves For Failure: " + (double) failMoves / fails);
+	
+	
+	
+		//***************Genetic Test**********************
+	
+		
+		//***************Bogo Test**********************
+		BogoSearch<EightQueensState> bogoTest = new BogoSearch<EightQueensState>();
+		EightQueensProblem bogoTestProblem = new EightQueensProblem();
+	
+		int bogoStates = 0;
+		for(int i = 0; i < 10; i++) {
+			bogoTest.solve(bogoTestProblem);
+			bogoStates += bogoTest.getStatesGenerated();
+		}
+		
+		System.out.println("Bogo Test Average: " + bogoStates / 10);
 	}
 }
