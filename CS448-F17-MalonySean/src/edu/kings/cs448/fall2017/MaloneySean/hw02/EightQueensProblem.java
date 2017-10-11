@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Sean Maloney
  *
  */
-public class EightQueensProblem implements HillClimbingProblem<EightQueensState> {
+public class EightQueensProblem implements HillClimbingProblem<EightQueensState>, GeneticProblem<EightQueensState> {
 
 	/**
 	 * Random used to generate numbers used in creating a random state.
@@ -48,6 +48,20 @@ public class EightQueensProblem implements HillClimbingProblem<EightQueensState>
 	public Set<EightQueensState> getNeighbors(EightQueensState theState) {
 		// TODO: Hopefully doing this right
 		return theState.getChildren();
+	}
+
+	//**************Genetic Problem Stuff*************************
+	
+	@Override
+	public EightQueensState crossover(EightQueensState firstParent, EightQueensState secondParent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void mutate(EightQueensState theState) {
+		// TODO Auto-generated method stub
+		
 	}
 
 //	public static void main(String[] args) {

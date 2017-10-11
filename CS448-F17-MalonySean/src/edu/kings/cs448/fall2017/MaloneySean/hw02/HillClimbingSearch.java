@@ -1,5 +1,6 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw02;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -24,8 +25,9 @@ public class HillClimbingSearch<S> {
 	 * @return THe best state it finds.
 	 */
 	public S solve(HillClimbingProblem<S> problem, int maxSidewaysMoves) {
-		S best = null;
+		
 		movesTaken = 0;
+		int sideWays = 0;
 		
 		S current = problem.getRandomState();
 		boolean moved = true;
@@ -34,48 +36,79 @@ public class HillClimbingSearch<S> {
 			Set<S> neighbors = problem.getNeighbors(current);
 		
 			
-			best = selectBest(neighbors, problem);
+			Set<S> bestSet = selectBestSet(neighbors, problem, current);
 			
 			int currentFitness = problem.getFitness(current);
-			int bestFitness = problem.getFitness(best);
-			
-			if(bestFitness > currentFitness) {
-				current = best;
+			//int bestFitness = problem.getFitness(best);
+			boolean isBetter = false;
+			if(bestSet.isEmpty() == false) {
+				isBetter = isSetBetter(currentFitness, bestSet, problem);
 			}
-			else if(bestFitness == currentFitness && getMovesTaken() < maxSidewaysMoves) {
-				current = best;
+			
+			if(isBetter) {
+				current = bestSet.iterator().next();
+				sideWays = 0;
+			}
+			else if(!bestSet.isEmpty() && sideWays < maxSidewaysMoves) {
+				current = bestSet.iterator().next();
+				sideWays++;
 			}
 			else {
 				moved = false;
 			}
+			
 			movesTaken++;
 		}
 		
-		return best;
+		return current;
+	}
+	
+	/**
+	 * Private helper method to determine if all the entries in the best set are better than the current state.
+	 * @param currentFitness The fitness of the current state.
+	 * @param best The set of the best neighbors.
+	 * @param problem The problem being solved.
+	 * @return Whether all members of the state are better.
+	 */
+	private boolean isSetBetter(int currentFitness, Set<S> best, HillClimbingProblem<S> problem) {
+		boolean result = true;
+		Iterator<S> iter = best.iterator();
+		
+		while(result == true && iter.hasNext()) {
+			S currentBest = iter.next();
+			int currentBestFitness = problem.getFitness(currentBest);
+			
+			if(currentBestFitness == currentFitness) {
+				result = false;
+			}
+		}
+		
+		return result;
 	}
 	
 	/**
 	 * Private helper method used to select the best state from a set of neighbors.
 	 * @param neighbors The neighbors of the state.
 	 * @param problem The problem to be solved.
+	 * @param current The current state.
 	 * @return The best neighbor.
 	 */
-	private S selectBest(Set<S> neighbors, HillClimbingProblem<S> problem) {
+	private Set<S> selectBestSet(Set<S> neighbors, HillClimbingProblem<S> problem, S current) {
 		Iterator<S> iter = neighbors.iterator();
-		S currentBest = iter.next();
+		Set<S> currentBest = new HashSet<S>();
 		
 		while(iter.hasNext()) {
-			S next = iter.next();
+			S nextBest = iter.next();
 			
-			int currentFitness = problem.getFitness(currentBest);
-			int nextFitness = problem.getFitness(next);
+			int currentFitness = problem.getFitness(current);
+			int nextFitness = problem.getFitness(nextBest);
 			
-			if(nextFitness > currentFitness) {
-				currentBest = next;
+			if(nextFitness >= currentFitness) {
+				currentBest.add(nextBest);
 			}
 			
 		}
-		
+	
 		return currentBest;
 	}
 	

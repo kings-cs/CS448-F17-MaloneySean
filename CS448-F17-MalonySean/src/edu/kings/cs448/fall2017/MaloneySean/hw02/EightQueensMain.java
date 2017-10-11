@@ -17,13 +17,14 @@ public class EightQueensMain {
 	public static void main(String[] args) {
 		HillClimbingSearch<EightQueensState> queenSearch = new HillClimbingSearch<EightQueensState>();
 
-		EightQueensProblem testProblem = new EightQueensProblem();
+		
 
 		int successes = 0;
 		int successMoves = 0;
 		int failMoves = 0;
 
 		for (int i = 0; i < 1000; i++) {
+			EightQueensProblem testProblem = new EightQueensProblem();
 			EightQueensState result = queenSearch.solve(testProblem, 0);
 			
 			int resultFitness = testProblem.getFitness(result);
@@ -36,8 +37,8 @@ public class EightQueensMain {
 		}
 		
 		System.out.println("No Moves Successes: " + successes);
-		System.out.println("No Moves Average Success Moves: " + successMoves / 1000);
-		System.out.println("No Moves Average Fail Moves: " + failMoves / 1000);
+		System.out.println("No Moves Average Success Moves: " + (double) successMoves / 1000);
+		System.out.println("No Moves Average Fail Moves: " + (double) failMoves / 1000);
 		
 		
 		successes = 0;
@@ -45,6 +46,7 @@ public class EightQueensMain {
 	    failMoves = 0;
 		
 		for (int i = 0; i < 1000; i++) {
+			EightQueensProblem testProblem = new EightQueensProblem();
 			EightQueensState result = queenSearch.solve(testProblem, 100);
 			
 			int resultFitness = testProblem.getFitness(result);
@@ -57,7 +59,7 @@ public class EightQueensMain {
 		}
 		
 		System.out.println("100 Moves Successes: " + successes);
-		System.out.println("100 Moves Average Success Moves: " + successMoves / 1000);
-		System.out.println("100 Moves Average Fail Moves: " + failMoves / 1000);
+		System.out.println("100 Moves Average Success Moves: " + (double) successMoves / 1000);
+		System.out.println("100 Moves Average Fail Moves: " + (double) failMoves / 1000);
 	}
 }
