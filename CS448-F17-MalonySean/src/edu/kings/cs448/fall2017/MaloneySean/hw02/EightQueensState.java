@@ -194,6 +194,31 @@ public class EightQueensState {
 		
 		return result;
 	}
+	
+	/**
+	 * Method to make a mutation based off the current state.
+	 * @param column The column to be mutated.
+	 * @param newRow Where within the column to move the Queen to.
+	 */
+	public void mutateQueen(int column, int newRow) {	
+		int currentRow = findQueen(column);
+		int update = newRow;
+		
+		
+		
+		board[currentRow][column] = ' ';
+		
+		
+		if(currentRow == newRow) {
+			update = newRow + 1;
+			if(update > 7) {
+				update = update % 8;
+			}
+		}
+		
+		board[update][column] = 'Q';
+	}
+	
 
 	/**
 	 * Calculates the amount of pairs of queens that are attacking each other on a given board.

@@ -47,7 +47,9 @@ public class EightQueensProblem implements HillClimbingProblem<EightQueensState>
 	@Override
 	public Set<EightQueensState> getNeighbors(EightQueensState theState) {
 		// TODO: Hopefully doing this right
-		return theState.getChildren();
+		Set<EightQueensState> result = theState.getChildren();
+		
+		return result;
 	}
 
 	//**************Genetic Problem Stuff*************************
@@ -55,12 +57,38 @@ public class EightQueensProblem implements HillClimbingProblem<EightQueensState>
 	@Override
 	public EightQueensState crossover(EightQueensState firstParent, EightQueensState secondParent) {
 		// TODO Auto-generated method stub
-		return null;
+		EightQueensState child = null;
+		int seperator = rand.nextInt(8);
+		
+		char[][] childBoard = new char[8][8];
+		char[][] parentOneBoard = firstParent.getBoardCopy();
+		char[][] parentTwoBoard = secondParent.getBoardCopy();
+		
+		
+		
+		for(int i = 0; i < parentOneBoard.length; i++) {
+			for(int j = 0; j < parentOneBoard[0].length; j++) {
+				char current = parentOneBoard[j][i];
+				
+				if(i >= seperator) {
+					current = parentTwoBoard[j][i];
+				}
+				
+				childBoard[j][i] = current;
+				
+			}
+		}
+
+		child = new EightQueensState(childBoard);
+		return child;
 	}
 
 	@Override
 	public void mutate(EightQueensState theState) {
 		// TODO Auto-generated method stub
+		int column = rand.nextInt(8);
+		int newRow = rand.nextInt(8);
+		theState.mutateQueen(column, newRow);
 		
 	}
 
