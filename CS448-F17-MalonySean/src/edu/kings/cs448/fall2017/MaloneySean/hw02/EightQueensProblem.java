@@ -93,9 +93,9 @@ public class EightQueensProblem implements HillClimbingProblem<EightQueensState>
 		int newRow = rand.nextInt(8);
 		theState.mutateQueen(column, newRow);
 		
-		if(this.getFitness(theState) < 0) {
-			System.out.println(theState.toString());
-		}
+//		if(this.getFitness(theState) < 0) {
+//			System.out.println(theState.toString());
+//		}
 	}
 
 //	public static void main(String[] args) {

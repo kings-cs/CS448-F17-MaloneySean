@@ -1,9 +1,10 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw02;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
+
 
 /**
  * Class used to solve problems with a Genetic Search.
@@ -41,7 +42,7 @@ public class GeneticSearch<S> {
 	public S solve(GeneticProblem<S> problem, int generationSize, int mutationRate) {
 		S result = null;
 		
-		Set<S> generation = new HashSet<S>();
+		List<S> generation = new ArrayList<S>();
 		for(int i = 0; i < generationSize; i++) {
 			generation.add(problem.getRandomState());
 		}
@@ -54,7 +55,7 @@ public class GeneticSearch<S> {
 			if(result != null) {
 				isRunning = false;
 			}
-			Set<S> nextGeneration = spawnGeneration(generation, problem, mutationRate);
+			List<S> nextGeneration = spawnGeneration(generation, problem, mutationRate);
 			generation = nextGeneration;
 			generationCount++;
 		}
@@ -71,8 +72,8 @@ public class GeneticSearch<S> {
 	 * @param mutationRate The likelihood of a child mutating.
 	 * @return The newly created generation.
 	 */
-	private Set<S> spawnGeneration(Set<S> generation, GeneticProblem<S> problem, int mutationRate){
-		Set<S> newGeneration = new HashSet<S>();
+	private List<S> spawnGeneration(List<S> generation, GeneticProblem<S> problem, int mutationRate){
+		List<S> newGeneration = new ArrayList<S>();
 		
 		for(int i = 0; i < generation.size(); i++) {
 			S parentOne = fitnessProportionateSelection(generation, problem);
@@ -103,7 +104,7 @@ public class GeneticSearch<S> {
 	 * @param problem The problem to be solved.
 	 * @return The new child.
 	 */
-	private S fitnessProportionateSelection(Set<S> generation, GeneticProblem<S> problem) {
+	private S fitnessProportionateSelection(List<S> generation, GeneticProblem<S> problem) {
 		int totalFitness = 0;
 		
 		for(S current : generation) {
@@ -151,7 +152,7 @@ public class GeneticSearch<S> {
 	 * @param problem The problem to be solved.
 	 * @return A solution state if found, otherwise null.
 	 */
-	private S checkGeneration(Set<S> generation, GeneticProblem<S> problem) {
+	private S checkGeneration(List<S> generation, GeneticProblem<S> problem) {
 		S result = null;
 		Iterator<S> iter = generation.iterator();
 		
