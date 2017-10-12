@@ -109,11 +109,15 @@ public class GeneticSearch<S> {
 		for(S current : generation) {
 			int currentFitness = problem.getFitness(current);
 			
-			System.out.println("C: " + currentFitness);
-			
-			totalFitness += currentFitness;
+//			if(currentFitness < 0) {
+//				System.out.println("C: " + currentFitness);
+//				System.out.println(generation.size());
+//				System.out.println(current.toString());
+//			}
+//			
+			totalFitness = totalFitness + currentFitness;
 		}
-		
+//		System.out.println("T: " + totalFitness + " G: " + generation.size());
 	
 		
 		S found = null;

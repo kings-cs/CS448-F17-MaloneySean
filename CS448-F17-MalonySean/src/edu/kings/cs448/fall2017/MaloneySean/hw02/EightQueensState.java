@@ -361,6 +361,8 @@ public class EightQueensState {
 //				{ '6', '5', '4', '3', '2', '1', '2', '3' },
 //				{ '7', '6', '5', '4', '3', '2', '1', '2' }, 
 //				{ '8', '7', '6', '5', '4', '3', '2', '1' } };
+//		
+//		
 //
 //		EightQueensState test = new EightQueensState(testBoard);
 //		EightQueensState testTwo = new EightQueensState(testBoardTwo);
