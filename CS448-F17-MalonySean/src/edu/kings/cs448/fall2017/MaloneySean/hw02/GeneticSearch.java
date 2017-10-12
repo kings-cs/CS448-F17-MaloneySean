@@ -80,7 +80,7 @@ public class GeneticSearch<S> {
 			S parentTwo = fitnessProportionateSelection(generation, problem);
 			S child = problem.crossover(parentOne, parentTwo);
 			
-			int chance = rand.nextInt(99);
+			int chance = rand.nextInt(100);
 			if(mutationRate >= chance) {
 				problem.mutate(child);
 			}
