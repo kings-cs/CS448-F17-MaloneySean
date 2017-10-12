@@ -1,10 +1,10 @@
 Hill Climbing Search Test: 
 
-No Sideways Steps Successes: 1
-No Sideways Steps Average Moves For Success: 1.0
-No Sideways Steps Average Moves For Failure: 1.024
+No Sideways Steps Successes: 614
+No Sideways Steps Average Moves For Success: 4.415309446254072
+No Sideways Steps Average Moves For Failure: 3.5854922279792745
 100 Sideways Steps Successes: 1000
-100 Sideways Steps Average Moves For Success: 23.33
+100 Sideways Steps Average Moves For Success: 5.366
 100 Sideways Steps Average Moves For Failure: 0.0
 
 Genetic Search Test: 
@@ -17,10 +17,9 @@ Bogo Test:
 
 Bogo Test Average: 8703
 
-	Hill Climbing is not functioning according to the text book.
-The results for no Sideways steps are far too low. While
-the average success steps may be correct for the 100 sideways
-steps run, the success rate is higher than the book says it should be.
+	Hill climbing's success rate with no sideways steps is much higher than that reported by the text but
+the amount of steps before success or failure line up very well. With 100 sideways steps the success rate is higher than 
+that reported by the text and the amount of steps taking for each success is much lower than that reported by the text.
 
 	The amount of generations needed is improved both by increasing
 the number of generations and the mutation rate. From these results,
