@@ -1,0 +1,30 @@
+Hill Climbing Search Test: 
+
+No Sideways Steps Successes: 1
+No Sideways Steps Average Moves For Success: 0.0
+No Sideways Steps Average Moves For Failure: 1.024
+100 Sideways Steps Successes: 1000
+100 Sideways Steps Average Moves For Success: 23.33
+100 Sideways Steps Average Moves For Failure: 0.0
+
+Genetic Search Test: 
+
+100 Generations 5% Mutation Average Generations Needed: 234
+100 Generations 20% Mutation Average Generations Needed: 19
+200 Generations 20% Mutation Average Generations Needed: 17
+
+Bogo Test: 
+
+Bogo Test Average: 8703
+
+	Hill Climbing is not functioning according to the text book.
+The results for no Sideways steps are far too low. While
+the average success steps may be correct for the 100 sideways
+steps run, the success rate is higher than the book says it should be.
+
+	The amount of generations needed is improved both by increasing
+the number of generations and the mutation rate. From these results,
+it appears that the higher mutation rate has a more drastic effect.
+
+	The extra work of the genetic algorithms is still much better
+than that of a Bogo search as it still runs through fewer nodes.

@@ -86,7 +86,7 @@ public class EightQueensMain {
 	
 		//***************Genetic Test**********************
 		System.out.println();
-		System.out.println("Gentic Search Test: ");
+		System.out.println("Genetic Search Test: ");
 		System.out.println();
 		GeneticSearch<EightQueensState> geneticTest = new GeneticSearch<EightQueensState>();
 		EightQueensProblem geneticProblem = new EightQueensProblem();
