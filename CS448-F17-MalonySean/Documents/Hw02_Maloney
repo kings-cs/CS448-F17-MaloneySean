@@ -1,7 +1,7 @@
 Hill Climbing Search Test: 
 
 No Sideways Steps Successes: 1
-No Sideways Steps Average Moves For Success: 0.0
+No Sideways Steps Average Moves For Success: 1.0
 No Sideways Steps Average Moves For Failure: 1.024
 100 Sideways Steps Successes: 1000
 100 Sideways Steps Average Moves For Success: 23.33
@@ -9,9 +9,9 @@ No Sideways Steps Average Moves For Failure: 1.024
 
 Genetic Search Test: 
 
-100 Generations 5% Mutation Average Generations Needed: 234
-100 Generations 20% Mutation Average Generations Needed: 19
-200 Generations 20% Mutation Average Generations Needed: 17
+100 Generations 5% Mutation Average Generations Needed: 213
+100 Generations 20% Mutation Average Generations Needed: 49
+200 Generations 20% Mutation Average Generations Needed: 24
 
 Bogo Test: 
 
