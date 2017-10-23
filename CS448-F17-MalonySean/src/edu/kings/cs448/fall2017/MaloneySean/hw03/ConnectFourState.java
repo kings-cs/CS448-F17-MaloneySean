@@ -179,9 +179,8 @@ public class ConnectFourState {
 		int result = 0;
 		for (int row = 0; row < gameBoard.length; row++) {
 			for (int col = 0; col < gameBoard[row].length; col++) {
-				//result += gameBoard[row][col];
-				//result = result << 3;
-				//TODO: FIGURE THIS THE FUCK OUT
+				result += gameBoard[row][col];
+				result = result << 7;
 			}
 		}
 		return result;
