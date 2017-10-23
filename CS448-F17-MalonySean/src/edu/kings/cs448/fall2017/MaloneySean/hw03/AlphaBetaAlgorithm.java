@@ -1,5 +1,6 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw03;
 
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -49,14 +50,14 @@ public class AlphaBetaAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 			if (result == null) {
 				result = action;
 				if (game.getPlayer(state) == GamePlayer.MAX) {
-					max = minValue(game, game.getResultingState(result, state), 1);
+					max = minValue(game, game.getResultingState(result, state), 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
 				} else {
-					max = maxValue(game, game.getResultingState(result, state), 1);
+					max = maxValue(game, game.getResultingState(result, state), 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
 				}
 			} else {
 				if (game.getPlayer(state) == GamePlayer.MAX) {
 					int current = minValue(game,
-							game.getResultingState(action, state), 1);
+							game.getResultingState(action, state), 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
 					if (current > max) {
 						result = action;
 						max = current;
@@ -64,7 +65,7 @@ public class AlphaBetaAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 				}
 				else{
 					int current = maxValue(game,
-							game.getResultingState(action, state), 1);
+							game.getResultingState(action, state), 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
 					if (current < max) {
 						result = action;
 						max = current;
@@ -81,10 +82,13 @@ public class AlphaBetaAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 	 * @param game The game being played.
 	 * @param state The state in question.
 	 * @param currentDepth The current depth of exploration.
+	 * @param alpha Tracks MAX's best case.
+	 * @param beta Tracks MIN's best case.
 	 * @return The Minimax value of that state.
 	 */
-	private int minValue(StrategyGame<S, A> game, S state, int currentDepth) {
+	private int minValue(StrategyGame<S, A> game, S state, int currentDepth, int alpha, int beta) {
 		int result = 0;
+		int betaPrime = beta;
 		count++;
 		if (game.isTerminalState(state)) {
 			previousCutoff = false;
@@ -98,9 +102,23 @@ public class AlphaBetaAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 		else {
 			result = Integer.MAX_VALUE;
 			Set<A> actions = game.getActions(state);
-			for (A action : actions) {
+			boolean isSearching = true;
+			Iterator<A> iter = actions.iterator();
+			while(isSearching && iter.hasNext()) {
+				A action = iter.next();
 				result = Math.min(result,
-						maxValue(game, game.getResultingState(action, state), currentDepth + 1));
+						maxValue(game, game.getResultingState(action, state), currentDepth + 1, alpha, betaPrime));
+				
+				if(result <= alpha) {
+					isSearching = false;
+				}
+				else {
+					betaPrime = Math.min(beta, result);
+				}
+				
+//				if(result > alpha) {
+//					betaPrime = Math.min(beta, result);
+//				}
 			}
 		}
 
@@ -114,11 +132,14 @@ public class AlphaBetaAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 	 * @param game The game being played.
 	 * @param state The state in question.
 	 * @param currentDepth The current depth of exploration.
+	 * @param alpha Tracks MAX's best case.
+	 * @param beta Tracks MIN's best case.
 	 * @return The Minimax value of that state.
 	 */
-	private int maxValue(StrategyGame<S, A> game, S state, int currentDepth) {
+	private int maxValue(StrategyGame<S, A> game, S state, int currentDepth, int alpha, int beta) {
 		count++;
 		int result = 0;
+		int alphaPrime = alpha;
 		if (game.isTerminalState(state)) {
 			previousCutoff = false;
 			result = game.getUtility(state);			
@@ -131,9 +152,21 @@ public class AlphaBetaAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 		else {
 			result = Integer.MIN_VALUE;
 			Set<A> actions = game.getActions(state);
-			for (A action : actions) {
+			boolean isSearching = true;
+			Iterator<A> iter = actions.iterator();
+			while(isSearching && iter.hasNext()) {
+				A action = iter.next();
 				result = Math.max(result,
-						minValue(game, game.getResultingState(action, state), currentDepth + 1));
+						minValue(game, game.getResultingState(action, state), currentDepth + 1, alphaPrime, beta));
+			
+				if(result >= beta) {
+					isSearching = false;
+				}
+				else {
+					alphaPrime = Math.max(alpha, result);
+				}
+				
+				
 			}
 		}
 		return result;
