@@ -142,18 +142,20 @@ public class ConnectFourState {
 	@Override
 	public String toString() {
 		StringBuffer seanBuffer = new StringBuffer();
+		seanBuffer.append("---------------");
+		seanBuffer.append("\n");
 		for (int row = 0; row < gameBoard.length; row++) {
 			for (int col = 0; col < gameBoard[row].length; col++) {
 				seanBuffer.append(gameBoard[row][col]);
-				if (col <= 1) {
+				if (col <= 5) {
 					seanBuffer.append("|");
 				}
 			}
 			seanBuffer.append("\n");
-			if (row <= 1) {
-				seanBuffer.append("----------------");
+			//if (row <= 5) {
+				seanBuffer.append("---------------");
 				seanBuffer.append("\n");
-			}
+			//}
 		}
 		return seanBuffer.toString();
 	}
@@ -185,4 +187,13 @@ public class ConnectFourState {
 		}
 		return result;
 	}
+
+//	/**
+//	 * Used for testing.
+//	 * @param args Not used.
+//	 */
+//	public static void main(String[] args) {
+//		ConnectFourState test = new ConnectFourState();
+//		System.out.println(test.toString());
+//	}
 }
