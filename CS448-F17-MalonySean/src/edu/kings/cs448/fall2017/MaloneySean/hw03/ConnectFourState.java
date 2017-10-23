@@ -131,8 +131,114 @@ public class ConnectFourState {
 	 * @return Whether or not they won.
 	 */
 	public boolean didPlayerWin(GamePlayer thePlayer) {
-		//TODO: FINISH THIS
-		return false;
+		//TODO: TEST THIS
+		boolean result = false;
+		//check rows
+		int i = 0;
+		int connectCount = 0;
+		while (i < gameBoard.length && !result) {
+			int j = 0;
+			while(j < gameBoard[i].length && !result) {
+				char current = gameBoard[i][j];
+				if(current == thePlayer.getSymbol()) {
+					connectCount++;
+				}
+				else {
+					connectCount = 0;
+				}
+				
+				if(connectCount == 4) {
+					result = true;
+				}
+				j++;
+			}
+			i++;
+			connectCount = 0;
+		}
+		
+		//Check Columns
+		i = 0;
+		connectCount = 0;
+		while (i < gameBoard.length && !result) {
+			int j = 0;
+			while(j < gameBoard[i].length && !result) {
+				char current = gameBoard[j][i];
+				if(current == thePlayer.getSymbol()) {
+					connectCount++;
+				}
+				else {
+					connectCount = 0;
+				}
+				
+				if(connectCount == 4) {
+					result = true;
+				}
+				j++;
+			}
+			connectCount = 0;
+			i++;
+		}
+		
+		
+		//left diagonal
+		if(!result) {
+			i = 0;
+			connectCount = 0;
+			
+			while(i < 2 * gameBoard.length) {
+				int j = 0;
+				while(j < gameBoard[i].length) {
+					int coord = i - j;
+			        if(coord >= 0 && coord < gameBoard[i].length) {
+			        	char current = gameBoard[j][coord];
+			        	if(current == thePlayer.getSymbol()) {
+			        		connectCount++;
+			        	}	
+			        	else {
+							connectCount = 0;
+						}
+						
+						if(connectCount == 4) {
+							result = true;
+						}
+			        }
+			       j++; 
+				}
+				connectCount = 0;
+				i++;
+			}
+		}
+		
+		//right diagonal
+		if(!result) {
+			i = 2 * gameBoard.length;
+			connectCount = 0;
+			
+			while(i > 0) {
+				
+				int j = 0;
+				while(j < gameBoard[i].length) {
+					int coord = i - j;
+			        if(coord >= 0 && coord < gameBoard[i].length) {
+			        	char current = gameBoard[j][coord];
+			        	if(current == thePlayer.getSymbol()) {
+			        		connectCount++;
+			        	}	
+			        	else {
+							connectCount = 0;
+						}
+						
+						if(connectCount == 4) {
+							result = true;
+						}
+			        }
+				}
+				connectCount = 0;
+				i--;
+			}
+		}
+		
+		return result;
 	}
 	
 	
