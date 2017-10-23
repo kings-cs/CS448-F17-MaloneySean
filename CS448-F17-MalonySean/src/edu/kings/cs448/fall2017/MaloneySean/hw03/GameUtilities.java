@@ -33,6 +33,7 @@ public class GameUtilities {
 			System.out.println("\tHuman");
 			System.out.println("\tMiniMaxCutoff");
 			System.out.println("\tAlphaBeta");
+			System.out.println("\tIterativeDeepening");
 			
 			System.out.print("Choose an algorithm for player " + playerNumber + ": ");
 			String choice = input.next();
@@ -56,6 +57,12 @@ public class GameUtilities {
 				int depth = input.nextInt();
 				//TODO: Does this have to be error checked?
 				algorithm = new AlphaBetaAlgorithm<S, A>(depth);
+			}
+			else if(choice.equalsIgnoreCase("IterativeDeepening")) {
+				System.out.println("Please Specifiy An Amount Of Time In ms: ");
+				int time = input.nextInt();
+				//TODO: Does this have to be error checked?
+				algorithm = new IterativeDeepeningAlgorithm<S, A>(time);
 			}
 			// TODO: Add additional cases here.
 
