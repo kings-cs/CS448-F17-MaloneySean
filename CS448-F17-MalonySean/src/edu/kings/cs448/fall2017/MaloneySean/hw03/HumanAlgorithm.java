@@ -1,5 +1,9 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw03;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Set;
+
 /**
  * Class that allows a human to play a game through user input.
  * @author Sean Maloney	
@@ -9,15 +13,42 @@ package edu.kings.cs448.fall2017.MaloneySean.hw03;
  */
 public class HumanAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 
+	/**
+	 * Scanner used so a human player can give input for the problem.
+	 */
+	private Scanner input;
+	
+	/**
+	 * Default constructor.
+	 */
+	public HumanAlgorithm() {
+		input = new Scanner(System.in);
+	}
+	
 	@Override
 	public A nextAction(StrategyGame<S, A> game, S state) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO: HANDLE INPUT MISMATCH
+		Set<A> actions = game.getActions(state);
+		ArrayList<A> orderedActions = new ArrayList<A>(actions);
+		
+		int choice = -1;
+		while(choice < 0 || choice >= orderedActions.size()) {
+			System.out.println("Available actions:");
+			for(int i = 0; i < orderedActions.size(); i++) {
+				System.out.println(i + ":\t" + orderedActions.get(i));
+			}
+			System.out.print("Your choice: ");
+			choice = input.nextInt();
+		}
+		
+		
+		A action = orderedActions.get(choice);
+		
+		return action;
 	}
 
 	@Override
 	public int getStateCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

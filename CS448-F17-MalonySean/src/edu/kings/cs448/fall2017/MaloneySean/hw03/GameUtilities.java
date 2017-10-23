@@ -30,7 +30,8 @@ public class GameUtilities {
 			// TODO: Add additional strings here.
 			System.out.println("\tRandom");
 			System.out.println("\tMiniMax");
-
+			System.out.println("\tHuman");
+			
 			System.out.print("Choose an algorithm for player " + playerNumber + ": ");
 			String choice = input.next();
 			if(choice.equalsIgnoreCase("Random")) {
@@ -38,6 +39,9 @@ public class GameUtilities {
 			}
 			else if(choice.equalsIgnoreCase("MiniMax")) {
 				algorithm = new MiniMaxAlgorithm<S, A>();
+			}
+			else if(choice.equalsIgnoreCase("Human")) {
+				algorithm = new HumanAlgorithm<S, A>();
 			}
 			// TODO: Add additional cases here.
 
