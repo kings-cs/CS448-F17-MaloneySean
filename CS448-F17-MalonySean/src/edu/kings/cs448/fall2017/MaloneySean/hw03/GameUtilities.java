@@ -32,6 +32,7 @@ public class GameUtilities {
 			System.out.println("\tMiniMax");
 			System.out.println("\tHuman");
 			System.out.println("\tMiniMaxCutoff");
+			System.out.println("\tAlphaBeta");
 			
 			System.out.print("Choose an algorithm for player " + playerNumber + ": ");
 			String choice = input.next();
@@ -47,8 +48,14 @@ public class GameUtilities {
 			else if(choice.equalsIgnoreCase("MiniMaxCutoff")) {
 				System.out.println("Please Specifiy Cutoff Depth: ");
 				int depth = input.nextInt();
-				
+				//TODO: Does this have to be error checked?
 				algorithm = new MiniMaxWithCutoffAlgorithm<S, A>(depth);
+			}
+			else if(choice.equalsIgnoreCase("AlphaBeta")) {
+				System.out.println("Please Specifiy Cutoff Depth: ");
+				int depth = input.nextInt();
+				//TODO: Does this have to be error checked?
+				algorithm = new AlphaBetaAlgorithm<S, A>(depth);
 			}
 			// TODO: Add additional cases here.
 
