@@ -43,14 +43,14 @@ public class MiniMaxWithCutoffAlgorithm<S, A> implements StrategyAlgorithm<S, A>
 			if (result == null) {
 				result = action;
 				if (game.getPlayer(state) == GamePlayer.MAX) {
-					max = minValue(game, game.getResultingState(result, state), 0);
+					max = minValue(game, game.getResultingState(result, state), 1);
 				} else {
-					max = maxValue(game, game.getResultingState(result, state), 0);
+					max = maxValue(game, game.getResultingState(result, state), 1);
 				}
 			} else {
 				if (game.getPlayer(state) == GamePlayer.MAX) {
 					int current = minValue(game,
-							game.getResultingState(action, state), 0);
+							game.getResultingState(action, state), 1);
 					if (current > max) {
 						result = action;
 						max = current;
@@ -58,7 +58,7 @@ public class MiniMaxWithCutoffAlgorithm<S, A> implements StrategyAlgorithm<S, A>
 				}
 				else{
 					int current = maxValue(game,
-							game.getResultingState(action, state), 0);
+							game.getResultingState(action, state), 1);
 					if (current < max) {
 						result = action;
 						max = current;
