@@ -31,6 +31,7 @@ public class GameUtilities {
 			System.out.println("\tRandom");
 			System.out.println("\tMiniMax");
 			System.out.println("\tHuman");
+			System.out.println("\tMiniMaxCutoff");
 			
 			System.out.print("Choose an algorithm for player " + playerNumber + ": ");
 			String choice = input.next();
@@ -42,6 +43,12 @@ public class GameUtilities {
 			}
 			else if(choice.equalsIgnoreCase("Human")) {
 				algorithm = new HumanAlgorithm<S, A>();
+			}
+			else if(choice.equalsIgnoreCase("MiniMaxCutoff")) {
+				System.out.println("Please Specifiy Cutoff Depth: ");
+				int depth = input.nextInt();
+				
+				algorithm = new MiniMaxWithCutoffAlgorithm<S, A>(depth);
 			}
 			// TODO: Add additional cases here.
 
