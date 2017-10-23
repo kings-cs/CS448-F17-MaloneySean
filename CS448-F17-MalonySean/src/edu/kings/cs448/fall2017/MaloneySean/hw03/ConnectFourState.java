@@ -115,13 +115,12 @@ public class ConnectFourState {
 	
 	/**
      * Gets an estimate of the utility that would eventually be reached from this state.
-     * The heuristic I have chosen is the difference in the number of rows / columns / diagonals in which a win is still possible for each player.
      * 
 	 * @return An estimate of the utility that will be reached from this state with both players playing optimally.
 	 */
 	public int evaluate() {
 		int result = 0;
-		
+		//TODO: FINISH THIS
 		return result;
 	}	
 	
@@ -132,6 +131,7 @@ public class ConnectFourState {
 	 * @return Whether or not they won.
 	 */
 	public boolean didPlayerWin(GamePlayer thePlayer) {
+		//TODO: FINISH THIS
 		return false;
 	}
 	
