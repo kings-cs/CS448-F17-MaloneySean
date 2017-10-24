@@ -159,9 +159,9 @@ public class ConnectFourState {
 		//Check Columns
 		i = 0;
 		connectCount = 0;
-		while (i < gameBoard.length && !result) {
+		while (i < gameBoard[0].length && !result) {
 			int j = 0;
-			while(j < gameBoard[i].length && !result) {
+			while(j < gameBoard.length && !result) {
 				char current = gameBoard[j][i];
 				if(current == thePlayer.getSymbol()) {
 					connectCount++;
@@ -185,11 +185,11 @@ public class ConnectFourState {
 			i = 0;
 			connectCount = 0;
 			
-			while(i < 2 * gameBoard.length) {
+			while(i < 2 * gameBoard[0].length) {
 				int j = 0;
-				while(j < gameBoard[i].length) {
+				while(j < gameBoard.length) {
 					int coord = i - j;
-			        if(coord >= 0 && coord < gameBoard[i].length) {
+			        if(coord >= 0 && coord < gameBoard[0].length) {
 			        	char current = gameBoard[j][coord];
 			        	if(current == thePlayer.getSymbol()) {
 			        		connectCount++;
@@ -211,15 +211,15 @@ public class ConnectFourState {
 		
 		//right diagonal
 		if(!result) {
-			i = 2 * gameBoard.length;
+			i = 2 * gameBoard[0].length;
 			connectCount = 0;
 			
 			while(i > 0) {
 				
 				int j = 0;
-				while(j < gameBoard[i].length) {
+				while(j < gameBoard.length) {
 					int coord = i - j;
-			        if(coord >= 0 && coord < gameBoard[i].length) {
+			        if(coord >= 0 && coord < gameBoard[0].length) {
 			        	char current = gameBoard[j][coord];
 			        	if(current == thePlayer.getSymbol()) {
 			        		connectCount++;
@@ -232,12 +232,13 @@ public class ConnectFourState {
 							result = true;
 						}
 			        }
+			        j++;
 				}
 				connectCount = 0;
 				i--;
 			}
 		}
-		
+
 		return result;
 	}
 	

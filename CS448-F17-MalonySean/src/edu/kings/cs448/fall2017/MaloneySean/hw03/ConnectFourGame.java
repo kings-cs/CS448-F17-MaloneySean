@@ -32,16 +32,19 @@ public class ConnectFourGame implements
 	@Override
 	public Set<ConnectFourAction> getActions(ConnectFourState theState) {
 		char playerSymbol = getPlayer(theState).getSymbol();
-		
 		Set<ConnectFourAction> actions = new HashSet<ConnectFourAction>();
 
 		char[][] board = theState.getGameBoardCopy();
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[i].length; j++) {
-				char current = board[i][j];
+		for (int i = 0; i < board[0].length; i++) {
+			boolean blankFound = false;
+			int j = board.length - 1;
+			while(blankFound == false && j > -1) {
+				char current = board[j][i];
 				if (current == ' ') {
-					actions.add(new ConnectFourAction(playerSymbol, i, j));
+					actions.add(new ConnectFourAction(playerSymbol, j, i));
+					blankFound = true;
 				}
+				j--;
 			}
 		}
 		
