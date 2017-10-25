@@ -125,12 +125,13 @@ public class ConnectFourState {
 		for(int i = 0; i < gameBoard.length; i++) {
 			int maxCount = 0;
 			int minCount = 0;
-			for(int j = 0; j < gameBoard[0].length; j++) {
+			for(int j = 1; j < gameBoard[0].length; j++) {
 				char current = gameBoard[i][j];
-				if(current == GamePlayer.MAX.getSymbol()) {
+				char left = gameBoard[i][j - 1];
+				if(current == GamePlayer.MAX.getSymbol() && left == GamePlayer.MAX.getSymbol()) {
 					maxCount++;
 				}
-				else if(current == GamePlayer.MIN.getSymbol()) {
+				else if(current == GamePlayer.MIN.getSymbol() && left == GamePlayer.MAX.getSymbol()) {
 					minCount++;
 				}
 				else {
@@ -242,8 +243,7 @@ public class ConnectFourState {
 			result -= minCount;
 		}
 		
-		
-		
+
 		return result;
 	}	
 	
