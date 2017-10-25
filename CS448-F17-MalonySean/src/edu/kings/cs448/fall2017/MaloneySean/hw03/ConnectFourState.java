@@ -208,18 +208,18 @@ public class ConnectFourState {
 				i++;
 			}
 		}
-		
 		//right diagonal
+		
 		if(!result) {
 			i = 2 * gameBoard[0].length;
 			connectCount = 0;
 			
-			while(i > 0) {
+			while(i > -gameBoard.length) {
 				
 				int j = 0;
 				while(j < gameBoard.length) {
-					int coord = i - j;
-			        if(coord >= 0 && coord < gameBoard[0].length) {
+					int coord = i + j;
+			        if(coord >= 0 && coord < gameBoard.length) {
 			        	char current = gameBoard[j][coord];
 			        	if(current == thePlayer.getSymbol()) {
 			        		connectCount++;
@@ -300,7 +300,22 @@ public class ConnectFourState {
 //	 * @param args Not used.
 //	 */
 //	public static void main(String[] args) {
-//		ConnectFourState test = new ConnectFourState();
+//		char[][] testBoard = {{'X', '2', '3', '4', 'X', '6', '7'},
+//							  {'X', 'X', '4', 'X', '6', '7', '5'}, 
+//							  {'3', 'X', 'X', '6', '7', '5', '4'},
+//							  {'4', 'X', 'X', '7', '5', '4', '3'},
+//							  {'5', '6', '7', ' ', '4', '3', '2'},
+//							  {'6', '7', '5', '4', '3', '2', '1'}};
+//		
+////		char[][] testBoard = {{' ', ' ', ' ', ' ', ' ', ' ', ' '},
+////		  {' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+////		  {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+////		  {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+////		  {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+////		  {' ', ' ', ' ', ' ', ' ', ' ', ' '}};
+//		
+//		ConnectFourState test = new ConnectFourState(testBoard);
+//		System.out.println(test.didPlayerWin(GamePlayer.MAX));
 //		System.out.println(test.toString());
 //	}
 }
