@@ -180,25 +180,26 @@ public class ConnectFourState {
 		}
 		
 		//LEFT DIAGONAL
-		for(int i = 0; i < 2 * gameBoard[0].length; i++) {
+		for(int i = 1; i < 2 * gameBoard[0].length; i++) {
 			int maxCount = 0;
 			int minCount = 0;
-			for(int j = 0; j < gameBoard.length; j++) {
-				int coord = i - j;
-				if(coord >= 0 && coord < gameBoard[0].length) {
+			for(int j = 1; j < gameBoard.length; j++) {
+				int coord = i - j; 
+				if(coord > 0 && coord < gameBoard[0].length) {
 
 					char current = gameBoard[j][coord];
-					if(current == GamePlayer.MAX.getSymbol()) {
+					char prev = gameBoard[j - 1][coord - 1];
+					if(current == GamePlayer.MAX.getSymbol() && prev == GamePlayer.MAX.getSymbol()) {
 						maxCount++;
 					}
-					else if(current == GamePlayer.MIN.getSymbol()) {
+					else if(current == GamePlayer.MIN.getSymbol() && prev == GamePlayer.MAX.getSymbol()) {
 						minCount++;
 					}
-					else {
-						//TODO: Should I remove this?
-						maxCount--;
-						minCount++;
-					}
+//					else {
+//						//TODO: Should I remove this?
+//						maxCount--;
+//						minCount++;
+//					}
 					if(maxCount < 0) {
 						maxCount = 0;
 					}
@@ -216,22 +217,27 @@ public class ConnectFourState {
 		for(int i = 2 * gameBoard[0].length; i > -gameBoard.length; i--) {
 			int maxCount = 0;
 			int minCount = 0;
-			for(int j = 0; j < gameBoard.length; j++) {
+			for(int j = 1; j < gameBoard.length; j++) {
 				int coord = i + j;
 				if(coord >= 0 && coord < gameBoard[0].length) {
 
 					char current = gameBoard[j][coord];
-					if(current == GamePlayer.MAX.getSymbol()) {
+					char prev = ' ';
+					if(coord + 1 > gameBoard[0].length) {
+						prev = gameBoard[j - 1][coord + 1];
+					}
+					
+					if(current == GamePlayer.MAX.getSymbol() && prev == GamePlayer.MAX.getSymbol()) {
 						maxCount++;
 					}
-					else if(current == GamePlayer.MIN.getSymbol()) {
+					else if(current == GamePlayer.MIN.getSymbol() && prev == GamePlayer.MAX.getSymbol()) {
 						minCount++;
 					}
-					else {
-						//TODO: Should I remove this?
-						maxCount--;
-						minCount++;
-					}
+//					else {
+//						//TODO: Should I remove this?
+//						maxCount--;
+//						minCount++;
+//					}
 					if(maxCount < 0) {
 						maxCount = 0;
 					}
