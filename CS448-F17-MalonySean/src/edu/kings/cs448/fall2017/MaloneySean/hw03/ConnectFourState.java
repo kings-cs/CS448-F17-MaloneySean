@@ -121,6 +121,129 @@ public class ConnectFourState {
 	public int evaluate() {
 		int result = 0;
 		//TODO: FINISH THIS
+		//ROWS
+		for(int i = 0; i < gameBoard.length; i++) {
+			int maxCount = 0;
+			int minCount = 0;
+			for(int j = 0; j < gameBoard[0].length; j++) {
+				char current = gameBoard[i][j];
+				if(current == GamePlayer.MAX.getSymbol()) {
+					maxCount++;
+				}
+				else if(current == GamePlayer.MIN.getSymbol()) {
+					minCount++;
+				}
+				else {
+					//TODO: Should I remove this?
+					maxCount--;
+					minCount++;
+				}
+				if(maxCount < 0) {
+					maxCount = 0;
+				}
+				if(minCount > 0) {
+					minCount = 0;
+				}
+			}
+			result += maxCount;
+			result -= minCount;
+		}
+		
+		//COLUMNS
+		for(int i = 0; i < gameBoard[0].length; i++) {
+			int maxCount = 0;
+			int minCount = 0;
+			for(int j = 0; j < gameBoard.length; j++) {
+				char current = gameBoard[j][i];
+				if(current == GamePlayer.MAX.getSymbol()) {
+					maxCount++;
+				}
+				else if(current == GamePlayer.MIN.getSymbol()) {
+					minCount++;
+				}
+				else {
+					//TODO: Should I remove this?
+					maxCount--;
+					minCount++;
+				}
+				if(maxCount < 0) {
+					maxCount = 0;
+				}
+				if(minCount > 0) {
+					minCount = 0;
+				}
+			}
+			result += maxCount;
+			result -= minCount;
+		}
+		
+		//LEFT DIAGONAL
+		for(int i = 0; i < 2 * gameBoard[0].length; i++) {
+			int maxCount = 0;
+			int minCount = 0;
+			for(int j = 0; j < gameBoard.length; j++) {
+				int coord = i - j;
+				if(coord >= 0 && coord < gameBoard[0].length) {
+
+					char current = gameBoard[j][coord];
+					if(current == GamePlayer.MAX.getSymbol()) {
+						maxCount++;
+					}
+					else if(current == GamePlayer.MIN.getSymbol()) {
+						minCount++;
+					}
+					else {
+						//TODO: Should I remove this?
+						maxCount--;
+						minCount++;
+					}
+					if(maxCount < 0) {
+						maxCount = 0;
+					}
+					if(minCount > 0) {
+						minCount = 0;
+					}
+				}
+			}
+			result += maxCount;
+			result -= minCount;
+		}
+		
+		
+		//RIGHT DIAGONAL
+		for(int i = 2 * gameBoard[0].length; i > -gameBoard.length; i--) {
+			int maxCount = 0;
+			int minCount = 0;
+			for(int j = 0; j < gameBoard.length; j++) {
+				int coord = i + j;
+				if(coord >= 0 && coord < gameBoard[0].length) {
+
+					char current = gameBoard[j][coord];
+					if(current == GamePlayer.MAX.getSymbol()) {
+						maxCount++;
+					}
+					else if(current == GamePlayer.MIN.getSymbol()) {
+						minCount++;
+					}
+					else {
+						//TODO: Should I remove this?
+						maxCount--;
+						minCount++;
+					}
+					if(maxCount < 0) {
+						maxCount = 0;
+					}
+					if(minCount > 0) {
+						minCount = 0;
+					}
+				}
+			}
+			result += maxCount;
+			result -= minCount;
+		}
+		
+		
+		
 		return result;
 	}	
 	
