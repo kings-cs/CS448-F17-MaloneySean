@@ -134,11 +134,11 @@ public class ConnectFourState {
 				else if(current == GamePlayer.MIN.getSymbol() && left == GamePlayer.MAX.getSymbol()) {
 					minCount++;
 				}
-				else {
-					//TODO: Should I remove this?
-					maxCount--;
-					minCount++;
-				}
+//				else {
+//					//TODO: Should I remove this?
+//					maxCount--;
+//					minCount++;
+//				}
 				if(maxCount < 0) {
 					maxCount = 0;
 				}
@@ -151,22 +151,23 @@ public class ConnectFourState {
 		}
 		
 		//COLUMNS
-		for(int i = 0; i < gameBoard[0].length; i++) {
+		for(int i = 1; i < gameBoard[0].length; i++) {
 			int maxCount = 0;
 			int minCount = 0;
 			for(int j = 0; j < gameBoard.length; j++) {
 				char current = gameBoard[j][i];
-				if(current == GamePlayer.MAX.getSymbol()) {
+				char down = gameBoard[j][i - 1];
+				if(current == GamePlayer.MAX.getSymbol() && down == GamePlayer.MAX.getSymbol()) {
 					maxCount++;
 				}
-				else if(current == GamePlayer.MIN.getSymbol()) {
+				else if(current == GamePlayer.MIN.getSymbol() && down == GamePlayer.MAX.getSymbol()) {
 					minCount++;
 				}
-				else {
-					//TODO: Should I remove this?
-					maxCount--;
-					minCount++;
-				}
+//				else {
+//					//TODO: Should I remove this?
+//					maxCount--;
+//					minCount++;
+//				}
 				if(maxCount < 0) {
 					maxCount = 0;
 				}
