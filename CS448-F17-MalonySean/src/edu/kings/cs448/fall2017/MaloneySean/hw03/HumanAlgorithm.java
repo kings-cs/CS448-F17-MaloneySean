@@ -1,6 +1,7 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw03;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -32,13 +33,29 @@ public class HumanAlgorithm<S, A> implements StrategyAlgorithm<S, A> {
 		ArrayList<A> orderedActions = new ArrayList<A>(actions);
 		
 		int choice = -1;
-		while(choice < 0 || choice >= orderedActions.size()) {
-			System.out.println("Available actions:");
-			for(int i = 0; i < orderedActions.size(); i++) {
-				System.out.println(i + ":\t" + orderedActions.get(i));
+		boolean goodInput = false;
+		while(goodInput == false) {
+			while(choice < 0 || choice >= orderedActions.size()) {
+				System.out.println("Available actions:");
+				for(int i = 0; i < orderedActions.size(); i++) {
+					System.out.println(i + ":\t" + orderedActions.get(i));
+				}
+				System.out.print("Your choice: ");
+
+
+
+
+				try {
+					choice = input.nextInt();
+
+					goodInput = true;
+
+				}
+				catch(InputMismatchException ime) {
+					System.out.println("Input Must Be A Number!");
+					input.next();
+				}
 			}
-			System.out.print("Your choice: ");
-			choice = input.nextInt();
 		}
 		
 		
