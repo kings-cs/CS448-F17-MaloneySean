@@ -1,5 +1,6 @@
 package edu.kings.cs448.fall2017.MaloneySean.hw04;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -64,9 +65,9 @@ public class BacktrackingWithAC3 extends SimpleBacktrackingSearch{
 	 * @param xJ The second variable to be checked.
 	 * @return The set of elements to be removed from the domain.
 	 */
-	private Set<Object> revise(ConstraintSatisfactionProblem problem, String xI, String xJ) {
-		boolean revised = false;
-		
+	public Set<Object> revise(ConstraintSatisfactionProblem problem, String xI, String xJ) {
+		//boolean revised = false;
+		Set<Object> toRemove = new HashSet<>();
 		
 		Set<Object> domainXi = problem.getDomains().get(xI);
 		Set<Object> domainXj = problem.getDomains().get(xJ);
@@ -74,14 +75,24 @@ public class BacktrackingWithAC3 extends SimpleBacktrackingSearch{
 		for(Object x : domainXi) {
 			boolean ok = false;
 			
+			Map<String, Object> assignment = new HashMap<>();
+			assignment.put(xI, x);
+			
 			for(Object y : domainXj) {
-				//if(problem.isConsistent(assignment))
+				assignment.put(xJ, y);
+				if(problem.isConsistent(assignment)) {
+					ok = true;
+				}
+				
+			}
+			if(!ok) {
+				toRemove.add(x);
 			}
 			
 			
 		}
 		
-		return null;
+		return toRemove;
 	}
 	
 	/**
