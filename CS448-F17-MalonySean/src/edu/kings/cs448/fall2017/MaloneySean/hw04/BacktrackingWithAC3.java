@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Class to solve a CSP using the AC3 algorithim with back tracking.
+ * Class to check arc consistency on a CSP using the AC3 algorithm with back tracking.
  * @author Sean Maloney
  */
 public class BacktrackingWithAC3 extends SimpleBacktrackingSearch{
