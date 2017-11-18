@@ -31,7 +31,7 @@ public class Sudoku {
 	 */
 	public static void main(String[] args) {
 
-		String puzzle = SudokuPuzzles.EASY_PUZZLE;
+		String puzzle = SudokuPuzzles.MEDIUM_PUZZLE;
 		Scanner input = new Scanner(puzzle);
 
 		ConstraintSatisfactionProblem csp = createProblem(input);
@@ -65,7 +65,7 @@ public class Sudoku {
 	public static ConstraintSatisfactionProblem createProblem(Scanner input) {
 		Set<Object> domain = new HashSet<Object>();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 1; i < 10; i++) {
 			// Possible values are digits 0-9.
 			domain.add(i);
 		}
@@ -88,8 +88,6 @@ public class Sudoku {
 					varDomain.add(cellValue);
 					variables.put(currentVar, varDomain);
 				}
-
-				// System.out.println(currentVar + ": " + variables.get(currentVar).toString());
 			}
 		}
 
@@ -158,7 +156,7 @@ public class Sudoku {
 //			System.out.println();
 		}
 
-		System.out.println(constraints.size());
+		//System.out.println(constraints.size());
 		return new ConstraintSatisfactionProblem(variables, constraints);
 	}
 }
