@@ -97,6 +97,8 @@ public class Sudoku {
 		}
 
 		Set<Constraint> constraints = new HashSet<>();
+		
+		//Create Row & Column Constraints
 		for (int i = 0; i < BOARD_LENGTH; i++) {
 			for (int j = 0; j < BOARD_WIDTH; j++) {
 				String rowVarOne = "C" + i + "_" + j;
@@ -110,18 +112,38 @@ public class Sudoku {
 						constraints.add(new BinaryDifferentConstraint(rowVarOne, rowVarTwo));
 					}
 
-					if (i != k) {
-						// System.out.println(colVarOne + " : " + colVarTwo);
+					if (i != k && !colVarOne.equals(colVarTwo)) {
+						//System.out.println(colVarOne + " : " + colVarTwo);
 						// Add all the column constraints
-						//constraints.add(new BinaryDifferentConstraint(colVarOne, colVarTwo));
+						constraints.add(new BinaryDifferentConstraint(colVarOne, colVarTwo));
 					}
 
 				}
 			}
 
 		}
+		
+//		//Create 3x3 Constraints
+//		for(int i = 0; i < BOARD_LENGTH; i++) {
+//			for(int j = 0; j < 3; j++) {
+//				int row = j + (i * 3);
+//				for(int k = 0; k < 3; k++) {
+//					int col = k + (i * 3);
+//					String varOne = "C" + row + "_" + col;
+//					for(int l = 0; l < 3; l++) {
+//						int colTwo = l + (i * 3);
+//						if(col != colTwo) {
+//							String varTwo = "C" + row + "_" + colTwo;
+//							
+//							constraints.add(new BinaryDifferentConstraint(varOne, varTwo));
+//						}
+//					}
+//					
+//				}
+//			}
+//		}
 
-		// System.out.println(constraints.size());
+		 System.out.println(constraints.size());
 		return new ConstraintSatisfactionProblem(variables, constraints);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * Class to check arc consistency on a CSP using the AC3 algorithm with back
@@ -19,19 +20,19 @@ public class BacktrackingWithAC3 extends SimpleBacktrackingSearch {
 			String mostRecentVar) {
 		boolean result = true;
 
-//		 Set<Object> mostRecentDomain = problem.getDomains().get(mostRecentVar);
-//		 mostRecentDomain.clear();
-//		 mostRecentDomain.add(assignment.get(mostRecentVar));
+		 Set<Object> mostRecentDomain = problem.getDomains().get(mostRecentVar);
+		 mostRecentDomain.clear();
+		 mostRecentDomain.add(assignment.get(mostRecentVar));
 
-		Set<VariablePair> pairs = new HashSet<>();
+		Stack<VariablePair> pairs = new Stack<>();
 
+		
 		addVariablesToP(problem.getDomains().keySet(), mostRecentVar, pairs);
 
-		Iterator<VariablePair> iter = pairs.iterator();
+	
 
-		while (iter.hasNext() && result) {
-			VariablePair current = iter.next();
-
+		while (!pairs.isEmpty() && result) {
+			VariablePair current = pairs.pop();
 			String xI = current.getVarOne();
 			String xJ = current.getVarTwo();
 
@@ -110,7 +111,7 @@ public class BacktrackingWithAC3 extends SimpleBacktrackingSearch {
 	 * @param pairs
 	 *            The set containing the ordered pairs.
 	 */
-	private void addVariablesToP(Set<String> variables, String secondVar, Set<VariablePair> pairs) {
+	private void addVariablesToP(Set<String> variables, String secondVar, Stack<VariablePair> pairs) {
 		// Set<VariablePair> pairs = new HashSet<VariablePair>();
 
 		for (String current : variables) {
