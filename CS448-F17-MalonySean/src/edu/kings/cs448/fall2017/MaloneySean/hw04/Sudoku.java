@@ -124,13 +124,26 @@ public class Sudoku {
 		}
 		
 		//Create 3x3 Constraints
+		
 		for(int i = 0; i < BOARD_LENGTH; i++) {
 			for(int j = 0; j < 3; j++) {
-				int row = j + (i * 3);
+				int row = j + (i * 3) / BOARD_LENGTH;
+				if(i > 2) {
+					row += (i / 3) * 2;
+				}
 				for(int k = 0; k < 3; k++) {
-					int col = k + (i * 3);
+					int col = k + (i * 3) % BOARD_LENGTH;
 					
 					System.out.println(row + " : " + col);
+					
+					
+					for(int q = 0; q < 9; q++) {
+						int r = q / 3;
+						int c = q + (i * 3) % 3;
+						
+						//System.out.println(row + "_" + col + " : " + r + "_" + c % 3);
+					}
+					
 				}
 			}
 			System.out.println();
