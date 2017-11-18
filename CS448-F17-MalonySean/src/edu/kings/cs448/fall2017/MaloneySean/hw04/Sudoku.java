@@ -123,25 +123,20 @@ public class Sudoku {
 
 		}
 		
-//		//Create 3x3 Constraints
-//		for(int i = 0; i < BOARD_LENGTH; i++) {
-//			for(int j = 0; j < 3; j++) {
-//				int row = j + (i * 3);
-//				for(int k = 0; k < 3; k++) {
-//					int col = k + (i * 3);
-//					String varOne = "C" + row + "_" + col;
-//					for(int l = 0; l < 3; l++) {
-//						int colTwo = l + (i * 3);
-//						if(col != colTwo) {
-//							String varTwo = "C" + row + "_" + colTwo;
-//							
-//							constraints.add(new BinaryDifferentConstraint(varOne, varTwo));
-//						}
-//					}
-//					
-//				}
-//			}
-//		}
+		//Create 3x3 Constraints
+		for(int i = 0; i < BOARD_LENGTH; i++) {
+			for(int j = 0; j < 3; j++) {
+				int row = j + (i * 3);
+				for(int k = 0; k < 3; k++) {
+					int col = k + (i * 3);
+					
+					System.out.println(row + " : " + col);
+				}
+			}
+			System.out.println();
+			System.out.println("----------------");
+			System.out.println();
+		}
 
 		 System.out.println(constraints.size());
 		return new ConstraintSatisfactionProblem(variables, constraints);
