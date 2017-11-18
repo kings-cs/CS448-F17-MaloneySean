@@ -52,6 +52,7 @@ public class SimpleBacktrackingSearch implements CSPSolver {
 	 */
 	private Map<String, Object> solve(ConstraintSatisfactionProblem problem, Map<String, Object> assignment) {
 		Map<String, Object> result = null;
+	
 		if(problem.isComplete(assignment)){
 			result = assignment;
 		}
