@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.kings.cs448.fall2017.MaloneySean.hw04;
+package edu.kings.cs448.fall2017.MaloneySean.csps;
 
 import java.util.HashMap;
 import java.util.HashSet;

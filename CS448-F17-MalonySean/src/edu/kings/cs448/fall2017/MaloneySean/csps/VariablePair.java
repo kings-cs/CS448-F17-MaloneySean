@@ -1,4 +1,4 @@
-package edu.kings.cs448.fall2017.MaloneySean.hw04;
+package edu.kings.cs448.fall2017.MaloneySean.csps;
 
 /**
  * A class to store information for an ordered pair of variables, (xI, xJ).
