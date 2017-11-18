@@ -26,10 +26,7 @@ public class BacktrackingWithAC3 extends SimpleBacktrackingSearch {
 
 		Stack<VariablePair> pairs = new Stack<>();
 
-		
 		addVariablesToP(problem.getDomains().keySet(), mostRecentVar, pairs);
-
-	
 
 		while (!pairs.isEmpty() && result) {
 			VariablePair current = pairs.pop();
@@ -116,7 +113,10 @@ public class BacktrackingWithAC3 extends SimpleBacktrackingSearch {
 
 		for (String current : variables) {
 			if (!current.equals(secondVar)) {
-				pairs.add(new VariablePair(current, secondVar));
+				VariablePair newPair = new VariablePair(current, secondVar);
+				if (!pairs.contains(newPair)) {
+					pairs.add(newPair);
+				}
 			}
 		}
 
