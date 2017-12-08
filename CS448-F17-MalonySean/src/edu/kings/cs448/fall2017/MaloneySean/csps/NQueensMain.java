@@ -28,7 +28,7 @@ public class NQueensMain {
 		
 		ConstraintSatisfactionProblem csp = createProblem(n);
 
-		CSPSolver search = new BacktrackingWithAC3();
+		CSPSolver search = new BacktrackingWithAC3AndHeuristics();
 
 		long timeBefore = System.currentTimeMillis();
 		Map<String, Object> assignment = search.solve(csp);
