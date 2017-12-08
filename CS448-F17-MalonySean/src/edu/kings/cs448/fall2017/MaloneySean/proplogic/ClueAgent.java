@@ -12,12 +12,12 @@ public class ClueAgent {
 	/**
 	 * Represents the case file.
 	 */
-	private static final String CASEFILE = "CF";
+	private static String CASEFILE = "CF";
 	
 	/**
 	 * Contains a string for each player in the game.
 	 */
-	private static final String[] PLAYERS = {"P1", 
+	private static String[] PLAYERS = {"P1", 
 											 "P2",
 											 "P3",
 											 "P4",
@@ -28,7 +28,7 @@ public class ClueAgent {
 	/**
 	 * Contains a string for each card in the game.
 	 */
-	private static final String[] CARDS = {"Mustard",
+	private static String[] CARDS = {"Mustard",
 											"Plum",
 											"Green",
 											"Peacock",
@@ -56,7 +56,7 @@ public class ClueAgent {
 	/**
 	 * Contains a string for every character card in the game.
 	 */
-	private static final String[] SUSPECTS = {"Mustard",
+	private static String[] SUSPECTS = {"Mustard",
 												"Plum",
 												"Green",
 												"Peacock",
@@ -66,7 +66,7 @@ public class ClueAgent {
 	/**
 	 * Contains a string for every weapon in the game.
 	 */
-	private static final String[] WEAPONS = {"Candlestick",
+	private static String[] WEAPONS = {"Candlestick",
 											"Revolver",
 											"Rope",
 											"Pipe",
@@ -75,7 +75,15 @@ public class ClueAgent {
 	/**
 	 * Contains a string for every room in the game.
 	 */
-	private static final String[] ROOMS = {};
+	private static String[] ROOMS = {"Hall",
+			"Lounge",
+			"Dining",
+			"Kitchen",
+			"Ballroom",
+			"Conservatory",
+			"Billiards",
+			"Library",
+			"Study"};
 	
 
 	
@@ -87,6 +95,8 @@ public class ClueAgent {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		Conjunction knowledgeBase = getInitialKnowledgeBase();
+		
+		
 		//Conjunction knowledgeBase = new Conjunction();
 		EntailmentChecker algorithm = new DPLLAlgorithm();
 		
@@ -116,11 +126,63 @@ public class ClueAgent {
 		
 		boolean playing = true;
 		int playerTurn = 0;
+		
+		
 		while(playing) {
 			String currentPlayer = PLAYERS[0];
 			
-			String result = displaySuspectKnowledge(algorithm, knowledgeBase, SUSPECTS[0]);
-			System.out.println(result);
+			if(playerTurn == 0) {
+				System.out.println("It is out turn!");
+				System.out.print("We get to suggest a suspect whom we believe commited this guesome murder.");
+				
+				
+				displaySuspectKnowledge(algorithm, knowledgeBase);
+				System.out.print("Whom do you wish to suggest?: ");
+				
+				String suspectGuess = input.next();
+				
+				System.out.println("We also get to suggest a weapon that we believe was used.");
+				displayWeaponKnowledge(algorithm, knowledgeBase);
+				System.out.print("Which weapon do you wish to suggest?: ");
+				
+				String weaponGuess = input.next();
+				
+				System.out.println("We also get to suggest a room in which we believe the murder was commited.");
+				displayRoomKnowledge(algorithm, knowledgeBase);
+				System.out.print("Which room do you wish to suggest?: ");
+				
+				String roomGuess = input.next();
+				
+				boolean cardShown = false;
+				int showCount = 0;
+				while(!cardShown && showCount < PLAYERS.length) {
+					String showingPlayer = PLAYERS[showCount];
+					System.out.print("Does " + showingPlayer + " show you a card? (y/n): ");
+					String yesNo = input.next();
+					
+					if(yesNo.equals("y")) {
+						cardShown = true;
+						
+						System.out.print("Which card did they show you?: ");
+						String shownCard = input.next();
+						
+						knowledgeBase.addSentence(new Proposition(buildHasCard(showingPlayer, shownCard)));
+						
+					}
+					
+					showCount++;
+				
+				}
+				
+				
+				System.out.print("Do you wish to also make an acusation? (y/n): ");
+				String yesNo = input.next();
+				if(yesNo.equals("y")) {
+					
+					
+				}
+				
+			}
 			
 			playing = false;
 		}
@@ -149,7 +211,7 @@ public class ClueAgent {
 			}
 			knowledgeBase.addSentence(cardLocations);
 		}
-		
+
 		//Each card is in at most one place
 		for(int i = 0; i < CARDS.length; i++) {
 			String currentCard = CARDS[i];
@@ -178,7 +240,7 @@ public class ClueAgent {
 			caseFileHasSuspect.addSentence(new Proposition(hasCard));
 		}
 		knowledgeBase.addSentence(caseFileHasSuspect);
-		
+
 		//Case File Contains At Least One Weapon Card
 		Disjunction caseFileHasWeapon = new Disjunction();
 		for(int i = 0; i < WEAPONS.length; i++) {
@@ -187,6 +249,7 @@ public class ClueAgent {
 			caseFileHasWeapon.addSentence(new Proposition(hasCard));
 		}
 		knowledgeBase.addSentence(caseFileHasWeapon);
+
 		
 		//Case File Contains At Least One Room Card
 		Disjunction caseFileHasRoom = new Disjunction();
@@ -197,7 +260,7 @@ public class ClueAgent {
 		}
 		knowledgeBase.addSentence(caseFileHasRoom);
 		
-		
+
 		//Case File Contains At Most One Suspect Card
 		for(int i = 0; i < SUSPECTS.length; i++) {
 			String currentSuspect = SUSPECTS[i];
@@ -210,8 +273,8 @@ public class ClueAgent {
 				}
 			}
 		}
-		
-		
+	
+
 		//Case File Contains At Most One Weapon Card
 		for(int i = 0; i < WEAPONS.length; i++) {
 			String currentWeapon = WEAPONS[i];
@@ -257,52 +320,121 @@ public class ClueAgent {
 	
 	/**
 	 * Private helper to display what we know about the suspect cards.
+	 * 
+	 * @param algorithm The entailment checker used.
+	 * @param knowledgeBase The knowledge base.
 	 */
-	private static String displaySuspectKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase, String suspect) {
+	private static void displaySuspectKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase) {
 		System.out.println("Here is what we know about the locations of the suspect cards: ");
 		
-		
-		StringBuffer result = new StringBuffer();
-		result.append(suspect + " is in one of the following: ");
-		
-		boolean playerHas = false;
-		int count = 0;
-		
-		while(!playerHas && count < PLAYERS.length) {
+		for(int i = 0; i < SUSPECTS.length; i++) {
+			String suspect = SUSPECTS[i];
+			StringBuffer result = new StringBuffer();
+			result.append(suspect + " is in one of the following: ");
 			
-			String player = PLAYERS[count];
-			String currentSentence = buildHasCard(player, suspect);
-			boolean entailment = algorithm.entails(knowledgeBase, new Proposition(currentSentence));
-			
-			System.out.println(currentSentence);
-			System.out.println(player + " : " + entailment);
-			
-			if(!entailment) {
-				result.append(player + " ");
+			boolean playerHas = false;
+			int count = 0;
+			while(!playerHas && count < PLAYERS.length) {
+
+				String player = PLAYERS[count];
+				String currentSentence = buildHasCard(player, suspect);
+				boolean entailment = algorithm.entails(knowledgeBase, new Proposition(currentSentence));
+
+				if(!entailment) {
+					if(count != 0) {
+						result.append(player + " ");
+					}
+				}
+				else {
+					playerHas = true;
+					result = new StringBuffer();
+					result.append(suspect + " is in one of the following: " + player);
+				}
+
+				count++;
 			}
-			else {
-				playerHas = true;
-				result = new StringBuffer();
-				result.append(suspect + " is in one of the following: " + player);
-			}
-			
-			count++;
+			System.out.println(result.toString());
 		}
 	
-		return result.toString();
+		
 	}
 	
 	/**
 	 * Private helper to display what we know about the weapon cards.
+	 * 
+	 * @param algorithm The entailment checker used.
+	 * @param knowledgeBase The knowledge base.
 	 */
-	private static void displayWeaponKnowledge() {
+	private static void displayWeaponKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase) {
 		System.out.println("Here is what we know about the locations of the weapons cards: ");
+		
+		for(int i = 0; i < WEAPONS.length; i++) {
+			String weapon = WEAPONS[i];
+			StringBuffer result = new StringBuffer();
+			result.append(weapon + " is in one of the following: ");
+			
+			boolean playerHas = false;
+			int count = 0;
+			while(!playerHas && count < PLAYERS.length) {
+
+				String player = PLAYERS[count];
+				String currentSentence = buildHasCard(player, weapon);
+				boolean entailment = algorithm.entails(knowledgeBase, new Proposition(currentSentence));
+
+				if(!entailment) {
+					if(count != 0) {
+						result.append(player + " ");
+					}
+				}
+				else {
+					playerHas = true;
+					result = new StringBuffer();
+					result.append(weapon + " is in one of the following: " + player);
+				}
+
+				count++;
+			}
+			System.out.println(result.toString());
+		}
+		
 	}
 	
 	/**
 	 * Private helper to display what we know about the locations of the room cards.
+	 * 
+	 * @param algorithm The entailment checker used.
+	 * @param knowledgeBase The knowledge base.
 	 */
-	private static void displayLocationKnowledge() {
+	private static void displayRoomKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase) {
 		System.out.println("Here is what we know about the locations of the room cards: ");
+		
+		for(int i = 0; i < ROOMS.length; i++) {
+			String room = ROOMS[i];
+			StringBuffer result = new StringBuffer();
+			result.append(room + " is in one of the following: ");
+			
+			boolean playerHas = false;
+			int count = 0;
+			while(!playerHas && count < PLAYERS.length) {
+
+				String player = PLAYERS[count];
+				String currentSentence = buildHasCard(player, room);
+				boolean entailment = algorithm.entails(knowledgeBase, new Proposition(currentSentence));
+
+				if(!entailment) {
+					if(count != 0) {
+						result.append(player + " ");
+					}
+				}
+				else {
+					playerHas = true;
+					result = new StringBuffer();
+					result.append(room + " is in one of the following: " + player);
+				}
+
+				count++;
+			}
+			System.out.println(result.toString());
+		}
 	}
 }
