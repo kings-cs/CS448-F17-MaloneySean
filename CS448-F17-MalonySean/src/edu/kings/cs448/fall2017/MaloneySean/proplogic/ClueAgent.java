@@ -260,28 +260,34 @@ public class ClueAgent {
 				}
 				
 				System.out.print("Did " + currentPlayer + " make an acussation? (y/n): ");
-				String win = input.next();
-				if(win.equals("y")) {
-					System.out.println(currentPlayer + " wins");
-					playing = true;
+				String accused = input.next();
+				if(accused.equals("y")) {
+					System.out.print("Were " + currentPlayer + "'s accusation correct? (y/n): ");
+					String win = input.next();
+					if(win.equals("y")) {
+						System.out.println(currentPlayer + " wins");
+						playing = true;
+					}
+					else {
+						System.out.println(currentPlayer + "is out of the game");
+						
+						Conjunction doesNotHave = new Conjunction();
+						Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(CASEFILE, suspectGuess)));
+						Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(CASEFILE, weaponGuess)));
+						Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(CASEFILE, roomGuess)));
+						
+						doesNotHave.addSentence(doesNotHaveSuspect);
+						doesNotHave.addSentence(doesNotHaveWeapon);
+						doesNotHave.addSentence(doesNotHaveRoom);
+						
+						knowledgeBase.addSentence(doesNotHave);
+						
+						
+						currentPlayers.remove(currentPlayer);
+					}
+					
 				}
-				else {
-					System.out.println(currentPlayer + "is out of the game");
-					
-					Conjunction doesNotHave = new Conjunction();
-					Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(CASEFILE, suspectGuess)));
-					Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(CASEFILE, weaponGuess)));
-					Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(CASEFILE, roomGuess)));
-					
-					doesNotHave.addSentence(doesNotHaveSuspect);
-					doesNotHave.addSentence(doesNotHaveWeapon);
-					doesNotHave.addSentence(doesNotHaveRoom);
-					
-					knowledgeBase.addSentence(doesNotHave);
-					
-					
-					currentPlayers.remove(currentPlayer);
-				}
+				
 				
 				
 			}
