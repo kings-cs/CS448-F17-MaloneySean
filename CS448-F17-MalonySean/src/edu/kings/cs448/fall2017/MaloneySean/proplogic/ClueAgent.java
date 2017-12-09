@@ -196,7 +196,7 @@ public class ClueAgent {
 				
 				System.out.print("Do you wish to also make an acusation? (y/n): ");
 				String yesNo = input.next();
-				if(yesNo.equals("y")) {
+				if(yesNo.equals("y")) {					
 					System.out.print("Was your accusation correct? (y/n): ");
 					String win = input.next();
 					
@@ -262,8 +262,20 @@ public class ClueAgent {
 				System.out.print("Did " + currentPlayer + " make an acussation? (y/n): ");
 				String accused = input.next();
 				if(accused.equals("y")) {
+					
+					
+					System.out.print("Whom did they accuse?: ");
+					String accusedGuess = input.next();
+					
+					System.out.print("What weapon did they say was used?: ");
+					String accusedWeapon = input.next();
+					
+					System.out.print("Where did they say the murder was commited?: ");
+					String accusedLocation = input.next();
+					
 					System.out.print("Were " + currentPlayer + "'s accusation correct? (y/n): ");
 					String win = input.next();
+					
 					if(win.equals("y")) {
 						System.out.println(currentPlayer + " wins");
 						playing = true;
@@ -272,9 +284,9 @@ public class ClueAgent {
 						System.out.println(currentPlayer + "is out of the game");
 						
 						Conjunction doesNotHave = new Conjunction();
-						Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(CASEFILE, suspectGuess)));
-						Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(CASEFILE, weaponGuess)));
-						Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(CASEFILE, roomGuess)));
+						Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(CASEFILE, accusedGuess)));
+						Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(CASEFILE, accusedWeapon)));
+						Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(CASEFILE, accusedLocation)));
 						
 						doesNotHave.addSentence(doesNotHaveSuspect);
 						doesNotHave.addSentence(doesNotHaveWeapon);
