@@ -1,5 +1,6 @@
 package edu.kings.cs448.fall2017.MaloneySean.proplogic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -92,6 +93,12 @@ public class ClueAgent {
 	 * @param args Unused.
 	 */
 	public static void main(String[] args) {
+		
+		ArrayList<String> currentPlayers = new ArrayList<String>();
+		for(int i = 0; i < PLAYERS.length; i++) {
+			currentPlayers.add(PLAYERS[i]);
+		}
+		
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		Conjunction knowledgeBase = getInitialKnowledgeBase();
@@ -129,34 +136,34 @@ public class ClueAgent {
 		
 		
 		while(playing) {
-			String currentPlayer = PLAYERS[0];
+			String currentPlayer = currentPlayers.get(playerTurn);
 			
 			if(playerTurn == 0) {
 				System.out.println("It is out turn!");
 				System.out.print("We get to suggest a suspect whom we believe commited this guesome murder.");
 				
 				
-				displaySuspectKnowledge(algorithm, knowledgeBase);
+				displaySuspectKnowledge(algorithm, knowledgeBase, currentPlayers);
 				System.out.print("Whom do you wish to suggest?: ");
 				
 				String suspectGuess = input.next();
 				
 				System.out.println("We also get to suggest a weapon that we believe was used.");
-				displayWeaponKnowledge(algorithm, knowledgeBase);
+				displayWeaponKnowledge(algorithm, knowledgeBase, currentPlayers);
 				System.out.print("Which weapon do you wish to suggest?: ");
 				
 				String weaponGuess = input.next();
 				
 				System.out.println("We also get to suggest a room in which we believe the murder was commited.");
-				displayRoomKnowledge(algorithm, knowledgeBase);
+				displayRoomKnowledge(algorithm, knowledgeBase, currentPlayers);
 				System.out.print("Which room do you wish to suggest?: ");
 				
 				String roomGuess = input.next();
 				
 				boolean cardShown = false;
 				int showCount = 0;
-				while(!cardShown && showCount < PLAYERS.length) {
-					String showingPlayer = PLAYERS[showCount];
+				while(!cardShown && showCount < currentPlayers.size()) {
+					String showingPlayer = currentPlayers.get(showCount);
 					System.out.print("Does " + showingPlayer + " show you a card? (y/n): ");
 					String yesNo = input.next();
 					
@@ -169,6 +176,18 @@ public class ClueAgent {
 						knowledgeBase.addSentence(new Proposition(buildHasCard(showingPlayer, shownCard)));
 						
 					}
+					else {
+						Conjunction doesNotHave = new Conjunction();
+						Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(showingPlayer, suspectGuess)));
+						Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(showingPlayer, weaponGuess)));
+						Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(showingPlayer, roomGuess)));
+						
+						doesNotHave.addSentence(doesNotHaveSuspect);
+						doesNotHave.addSentence(doesNotHaveWeapon);
+						doesNotHave.addSentence(doesNotHaveRoom);
+						
+						knowledgeBase.addSentence(doesNotHave);
+					}
 					
 					showCount++;
 				
@@ -178,13 +197,100 @@ public class ClueAgent {
 				System.out.print("Do you wish to also make an acusation? (y/n): ");
 				String yesNo = input.next();
 				if(yesNo.equals("y")) {
+					System.out.print("Was your accusation correct? (y/n): ");
+					String win = input.next();
 					
+					if(win.equals("y")) {
+						System.out.println("Congratulations!");
+					}
+					else {
+						System.out.println("Better luck next time!");
+					}
 					
+					playing = false;
 				}
 				
 			}
+			else {
+				
+				//OTHER PLAYERS TURN
+				
+				System.out.println("It is " + currentPlayer + "'s turn!");
+				
+				System.out.print("Whom did " + currentPlayer + " guess commited the murder?: ");
+				String suspectGuess = input.next();
+				
+				
+				System.out.print("What weapon did " + currentPlayer + " guess was used?: ");
+				String weaponGuess = input.next();
+				
+				System.out.print("Where did " + currentPlayer + " guess the crime was commited?: ");
+				String roomGuess = input.next();
+				
+				boolean cardShown = false;
+				int showCount = 0;
+				while(!cardShown && showCount < currentPlayers.size()) {
+					String showingPlayer = currentPlayers.get(showCount);
+					System.out.print("Did " + showingPlayer + " show " + currentPlayer + " a card? (y/n): ");
+					String yesNo = input.next();
+					
+					if(yesNo.equals("y")) {
+						cardShown = true;
+						
+						Disjunction hasGuessCard = new Disjunction();
+						hasGuessCard.addSentence(new Proposition(buildHasCard(showingPlayer, suspectGuess)));
+						hasGuessCard.addSentence(new Proposition(buildHasCard(showingPlayer, weaponGuess)));
+						hasGuessCard.addSentence(new Proposition(buildHasCard(showingPlayer, roomGuess)));
+					}
+					else {
+						Conjunction doesNotHave = new Conjunction();
+						Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(showingPlayer, suspectGuess)));
+						Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(showingPlayer, weaponGuess)));
+						Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(showingPlayer, roomGuess)));
+						
+						doesNotHave.addSentence(doesNotHaveSuspect);
+						doesNotHave.addSentence(doesNotHaveWeapon);
+						doesNotHave.addSentence(doesNotHaveRoom);
+						
+						knowledgeBase.addSentence(doesNotHave);
+					}
+					
+					showCount++;
+				
+				}
+				
+				System.out.print("Did " + currentPlayer + " make an acussation? (y/n): ");
+				String win = input.next();
+				if(win.equals("y")) {
+					System.out.println(currentPlayer + " wins");
+					playing = true;
+				}
+				else {
+					System.out.println(currentPlayer + "is out of the game");
+					
+					Conjunction doesNotHave = new Conjunction();
+					Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(CASEFILE, suspectGuess)));
+					Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(CASEFILE, weaponGuess)));
+					Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(CASEFILE, roomGuess)));
+					
+					doesNotHave.addSentence(doesNotHaveSuspect);
+					doesNotHave.addSentence(doesNotHaveWeapon);
+					doesNotHave.addSentence(doesNotHaveRoom);
+					
+					knowledgeBase.addSentence(doesNotHave);
+					
+					
+					currentPlayers.remove(currentPlayer);
+				}
+				
+				
+			}
 			
-			playing = false;
+			playerTurn++;
+			
+			if(!(playerTurn < currentPlayers.size() - 1)) {
+				playerTurn = 0;
+			}
 		}
 		
 	}
@@ -323,8 +429,9 @@ public class ClueAgent {
 	 * 
 	 * @param algorithm The entailment checker used.
 	 * @param knowledgeBase The knowledge base.
+	 * @param currentPlayers The players still playing.
 	 */
-	private static void displaySuspectKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase) {
+	private static void displaySuspectKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase, ArrayList<String> currentPlayers) {
 		System.out.println("Here is what we know about the locations of the suspect cards: ");
 		
 		for(int i = 0; i < SUSPECTS.length; i++) {
@@ -334,9 +441,9 @@ public class ClueAgent {
 			
 			boolean playerHas = false;
 			int count = 0;
-			while(!playerHas && count < PLAYERS.length) {
+			while(!playerHas && count < currentPlayers.size()) {
 
-				String player = PLAYERS[count];
+				String player = currentPlayers.get(count);
 				String currentSentence = buildHasCard(player, suspect);
 				boolean entailment = algorithm.entails(knowledgeBase, new Proposition(currentSentence));
 
@@ -364,8 +471,9 @@ public class ClueAgent {
 	 * 
 	 * @param algorithm The entailment checker used.
 	 * @param knowledgeBase The knowledge base.
+	 * @param currentPlayers The players who are still left in the game.
 	 */
-	private static void displayWeaponKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase) {
+	private static void displayWeaponKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase, ArrayList<String> currentPlayers) {
 		System.out.println("Here is what we know about the locations of the weapons cards: ");
 		
 		for(int i = 0; i < WEAPONS.length; i++) {
@@ -375,9 +483,9 @@ public class ClueAgent {
 			
 			boolean playerHas = false;
 			int count = 0;
-			while(!playerHas && count < PLAYERS.length) {
+			while(!playerHas && count < currentPlayers.size()) {
 
-				String player = PLAYERS[count];
+				String player = currentPlayers.get(count);
 				String currentSentence = buildHasCard(player, weapon);
 				boolean entailment = algorithm.entails(knowledgeBase, new Proposition(currentSentence));
 
@@ -404,8 +512,9 @@ public class ClueAgent {
 	 * 
 	 * @param algorithm The entailment checker used.
 	 * @param knowledgeBase The knowledge base.
+	 * @param currentPlayers The players who are still left in the game.
 	 */
-	private static void displayRoomKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase) {
+	private static void displayRoomKnowledge(EntailmentChecker algorithm, Sentence knowledgeBase, ArrayList<String> currentPlayers) {
 		System.out.println("Here is what we know about the locations of the room cards: ");
 		
 		for(int i = 0; i < ROOMS.length; i++) {
@@ -415,9 +524,9 @@ public class ClueAgent {
 			
 			boolean playerHas = false;
 			int count = 0;
-			while(!playerHas && count < PLAYERS.length) {
+			while(!playerHas && count < currentPlayers.size()) {
 
-				String player = PLAYERS[count];
+				String player = currentPlayers.get(count);
 				String currentSentence = buildHasCard(player, room);
 				boolean entailment = algorithm.entails(knowledgeBase, new Proposition(currentSentence));
 
