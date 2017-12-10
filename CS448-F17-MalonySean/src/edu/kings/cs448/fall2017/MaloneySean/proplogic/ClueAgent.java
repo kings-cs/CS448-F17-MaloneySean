@@ -177,7 +177,7 @@ public class ClueAgent {
 						
 					}
 					else {
-						Conjunction doesNotHave = new Conjunction();
+						Disjunction doesNotHave = new Disjunction();
 						Negation doesNotHaveSuspect = new Negation(new Proposition(buildHasCard(showingPlayer, suspectGuess)));
 						Negation doesNotHaveWeapon = new Negation(new Proposition(buildHasCard(showingPlayer, weaponGuess)));
 						Negation doesNotHaveRoom = new Negation(new Proposition(buildHasCard(showingPlayer, roomGuess)));
