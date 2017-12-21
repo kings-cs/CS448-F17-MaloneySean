@@ -1,4 +1,4 @@
-package edu.kings.cs448.fall2017.MaloneySean.hw02;
+package edu.kings.cs448.fall2017.MaloneySean.localsearch;
 
 import java.util.Set;
 

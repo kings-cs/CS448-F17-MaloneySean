@@ -1,4 +1,4 @@
-package edu.kings.cs448.fall2017.MaloneySean.hw03;
+package edu.kings.cs448.fall2017.MaloneySean.strategygames;
 
 import java.util.Scanner;
 
